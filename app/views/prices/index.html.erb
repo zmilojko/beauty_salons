@@ -16,8 +16,8 @@
     <% @prices.each do |price| %>
       <tr>
         <td><%= price.price %></td>
-        <td><%= price.salon %></td>
-        <td><%= price.service %></td>
+        <td><%= price.salon.name %></td>
+        <td><%= price.service.name %></td>
         <td><%= link_to 'Show', price %></td>
         <td><%= link_to 'Edit', edit_price_path(price) %></td>
         <td><%= link_to 'Destroy', price, method: :delete, data: { confirm: 'Are you sure?' } %></td>

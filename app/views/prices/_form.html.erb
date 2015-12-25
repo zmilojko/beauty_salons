@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :salon_id %><br>
-    <%= f.text_field :salon_id %>
+    <%= f.select :salon_id, Salon.all.collect {|x| [x.name, x.id]}, {} %>
   </div>
   <div class="field">
     <%= f.label :service_id %><br>
-    <%= f.text_field :service_id %>
+    <%= f.select :service_id, Service.all.collect {|x| [x.name, x.id]}, {} %>
   </div>
   <div class="actions">
     <%= f.submit %>
