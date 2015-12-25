@@ -2,34 +2,15 @@
 
 <h1>Listing Salons</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Description</th>
-      <th>Lat</th>
-      <th>Lng</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @salons.each do |salon| %>
-      <tr>
-        <td><%= salon.name %></td>
-        <td><%= salon.address %></td>
-        <td><%= salon.description %></td>
-        <td><%= salon.lat %></td>
-        <td><%= salon.lng %></td>
-        <td><%= link_to 'Show', salon %></td>
-        <td><%= link_to 'Edit', edit_salon_path(salon) %></td>
-        <td><%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<ul>
+  <% @salons.each do |salon| %>
+  <li><b><%= salon.name %></b> - <%= salon.address %> <%= link_to 'Show', salon %> / <%= link_to 'Edit', edit_salon_path(salon) %> / <%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    <ul>
+      <% salon.services.each do |service| %>
+        <li><%= service.name %>: <%= service.prices.find_by_salon_id(salon.id).price %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
 
 <%= link_to 'New Salon', new_salon_path %>
