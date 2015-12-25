@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :prices
+  resources :prices
   resources :services
   resources :salons
   # The priority is based upon order of creation: first created -> highest priority.
