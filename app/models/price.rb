@@ -1,4 +1,4 @@
 class Price < ActiveRecord::Base
-  belongs_to :salon
-  belongs_to :service
+  has_many :salons
+  has_many :services
 end
