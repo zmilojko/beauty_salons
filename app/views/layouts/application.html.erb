@@ -7,7 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<ul>
+  <li><%= link_to "Salons", salons_path %></li>
+  <li><%= link_to "Prices", prices_path %></li>
+  <li><%= link_to "Services", services_path %></li>
+</ul>
 <%= yield %>
 
 </body>
