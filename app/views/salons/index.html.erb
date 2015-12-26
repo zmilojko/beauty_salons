@@ -6,8 +6,8 @@
   <% @salons.each do |salon| %>
   <li><b><%= salon.name %></b> - <%= salon.address %> <%= link_to 'Show', salon %> / <%= link_to 'Edit', edit_salon_path(salon) %> / <%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' } %></li>
     <ul>
-      <% salon.services.each do |service| %>
-        <li><%= service.name %>: <%= service.prices.find_by_salon_id(salon.id).price %></li>
+      <% salon.prices.each do |p| %>
+        <li><%= p.service.name %>: <%= p.price %></li>
       <% end %>
     </ul>
   <% end %>
