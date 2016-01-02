@@ -2,15 +2,16 @@
 
 <h1>Listing Salons</h1>
 
-<ul>
   <% @salons.each do |salon| %>
-  <li><b><%= salon.name %></b> - <%= salon.address %> <%= link_to 'Show', salon %> / <%= link_to 'Edit', edit_salon_path(salon) %> / <%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-    <ul>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <b><%= salon.name %></b> - <%= salon.address %> <%= link_to 'Show', salon %> / <%= link_to 'Edit', edit_salon_path(salon) %> / <%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% salon.prices.each do |p| %>
-        <li><%= p.service.name %>: <%= p.price %></li>
+        <br><%= p.service.name %>: <%= p.price %>
       <% end %>
-    </ul>
+      </div>
+    </div>
   <% end %>
-</ul>
+
 
 <%= link_to 'New Salon', new_salon_path %>
