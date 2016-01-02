@@ -7,12 +7,12 @@
 
 <p>
   <strong>Salon:</strong>
-  <%= @price.salon %>
+  <%= @price.salon.name %>
 </p>
 
 <p>
   <strong>Service:</strong>
-  <%= @price.service %>
+  <%= @price.service.name %>
 </p>
 
 <%= link_to 'Edit', edit_price_path(@price) %> |
