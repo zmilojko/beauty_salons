@@ -1,14 +1,24 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Salons</h1>
-
-  <% @salons.each do |salon| %>
-  <div class="panel panel-default">
+<% end %>
+<% @salons.each do |salon| %>
+  <div class="panel panel-default salon">
     <div class="panel-body">
-      <b><%= salon.name %></b> - <%= salon.address %> <%= link_to 'Show', salon %> / <%= link_to 'Edit', edit_salon_path(salon) %> / <%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% salon.prices.each do |p| %>
-        <br><%= p.service.name %>: <%= p.price %>
-      <% end %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= image_tag "default.png" %>
+        </div>
+        <div class="col-md-8">
+          <h3 class="title"><%= salon.name %></h3>
+          <span class="address"><%= salon.address %></span>
+          <p><%= salon.description %></p>
+          <div class="pull-right">
+            <%= link_to 'Pogledaj salon', salon,  class: "btn btn-default" %>
+            <%= link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary" %>
+            <%= link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </div>
+       </div>
+      </div>
       </div>
     </div>
   <% end %>

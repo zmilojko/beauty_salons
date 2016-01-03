@@ -15,3 +15,13 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+img{
+  max-width: 100%;
+}
+.panel.salon h3.title{
+  margin: 0 0 4px 0;
+}
+.panel.salon span.address{
+  margin-bottom: 6px;
+  display: inline-block;
+}
