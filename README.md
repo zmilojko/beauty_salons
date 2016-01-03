@@ -16,3 +16,22 @@ This app will show you all the salons with all their prices and services.
 - Navigate command line to a folder where you stored this repo and run:
     - rake db:migrate
     - rake db:seed
+
+## ToDo:
+
+- Add Address search box to Salon edit / new page
+- Add phone, email, facebook, working hours to Salon
+- Add City scaffold
+- Add Municipal scaffold
+- Add Municipal to Salon (index,show,edit,new)
+- Style single service page
+- Add Footer
+- Add Header
+- Change single salon url to '/salon/:permalink'
+- Add permalink (unique) to service
+- Change single service link to '/usluga/:permalink'
+- Count salons for each service and display it in sidebar
+- Modify service page to show all salons with that service (and display price)
+- Sort salons by service price on single service page
+- Add logo image to salon
+- Style single salon page
