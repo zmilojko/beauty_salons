@@ -1,0 +1,5 @@
+<ul>
+  <% @prices.each do |p| %>
+    <li><%= link_to p.service.name, p.service,  class: "" %></li>
+  <% end %>
+</ul>

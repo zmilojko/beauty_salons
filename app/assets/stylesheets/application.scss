@@ -25,3 +25,13 @@ img{
   margin-bottom: 6px;
   display: inline-block;
 }
+.panel-services ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.panel-services ul li{
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ececec;
+}
