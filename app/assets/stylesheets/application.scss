@@ -13,8 +13,15 @@
  *= require_tree .
  *= require_self
  */
+/**$border-radius-base: 0;
+$btn-default-bg:#7842dd;
+$btn-default-color:#fff;
+$btn-default-border:$btn-default-bg;**/
 @import "bootstrap-sprockets";
 @import "bootstrap";
+#map_canvas{
+  min-height: 400px;
+}
 img{
   max-width: 100%;
 }
