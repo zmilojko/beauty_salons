@@ -13,9 +13,9 @@ class ServicesController < ApplicationController
     @param = params[:id]
     @sort = params[:sort]
     if @sort == "skuplji"
-      @salons = Service.find(params[:id]).salons.joins(:prices).reorder('prices.price DESC').distinct
+      @salons = Service.find_by_slug(params[:id]).salons.joins(:prices).reorder('prices.price DESC').distinct
     else
-      @salons = Service.find(params[:id]).salons.joins(:prices).reorder('prices.price ASC').distinct
+      @salons = Service.find_by_slug(params[:id]).salons.joins(:prices).reorder('prices.price ASC').distinct
     end
 
 
