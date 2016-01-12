@@ -105,7 +105,7 @@ footer h3:after{
 }
 div.copyright{
   background-color: #171717;
-  color: $navbar-inverse-link-color;
+  color: darken($navbar-inverse-link-color,40%);
   padding: $padding-large-vertical 0;
   border-top: 1px solid #353535;
 }
