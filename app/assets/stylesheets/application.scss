@@ -24,6 +24,7 @@ $navbar-inverse-link-color:rgba(255,255,255,0.8);
 $navbar-inverse-link-hover-color:#fff;
 $navbar-margin-bottom:0;
 $header-footer-margin: 40px;
+$navbar-border-radius: 0;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 .navbar-nav > li > a{
