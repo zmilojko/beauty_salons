@@ -10,6 +10,15 @@ class ServicesController < ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
+    @param = params[:id]
+    @sort = params[:sort]
+    if @sort == "skuplji"
+      @salons = Service.find(params[:id]).salons.joins(:prices).reorder('prices.price DESC').distinct
+    else
+      @salons = Service.find(params[:id]).salons.joins(:prices).reorder('prices.price ASC').distinct
+    end
+
+
   end
 
   # GET /services/new

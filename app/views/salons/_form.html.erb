@@ -10,32 +10,72 @@
       </ul>
     </div>
   <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">Now editing: <b><%= @salon.name %></b></div>
+    <div class="panel-body">
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, :class => "form-control", :required => true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :permalink %><br>
+        <%= f.text_field :permalink, :class => "form-control", :required => true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :address %><br>
+        <%= f.text_field :address, :class => "form-control", :required => true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, :rows => 5, :class => "form-control", :required => true %>
+      </div>
+      <div class="form-group hidden">
+        <%= f.label :lat %><br>
+        <%= f.text_field :lat, :class => "form-control" %>
+      </div>
+      <div class="form-group hidden">
+        <%= f.label :lng %><br>
+        <%= f.text_field :lng, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <label>Location:</label><br>
+        <div id="map_canvas" class="form-control"></div>
+      </div>
+      <% if f.object.lat.nil?
+        lat = 44.797638270
+      else
+        lat = f.object.lat
+      end
+      if f.object.lng.nil?
+        lng = 20.445800781
+      else
+        lng = f.object.lng
+      end %>
+      <script>
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            zoom: 15,
+            center: new google.maps.LatLng(<%= lat %>,<%= lng %>),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+        var myMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(<%= lat %>,<%= lng %>),
+            draggable: true
+        });
+
+        google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+          var salon_lat = document.getElementById("salon_lat");
+        salon_lat.value = evt.latLng.lat().toFixed(9);
+
+        var salon_lng = document.getElementById("salon_lng");
+        salon_lng.value = evt.latLng.lng().toFixed(9);
+        });
+        map.setCenter(myMarker.position);
+        myMarker.setMap(map);
+      </script>
+      <div class="actions">
+        <%= f.submit 'Update', :class => 'btn btn-success' %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :permalink %><br>
-    <%= f.text_field :permalink %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :lat %><br>
-    <%= f.text_field :lat %>
-  </div>
-  <div class="field">
-    <%= f.label :lng %><br>
-    <%= f.text_field :lng %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

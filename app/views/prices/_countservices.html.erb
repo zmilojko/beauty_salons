@@ -1,0 +1,12 @@
+<% @services = Service.all %>
+<ul class="nav nav-pills nav-stacked">
+<% @services.each do |s| %>
+  <% if s.prices.count != 0 %>
+  <li>
+    <%= link_to(s) do %>
+      <%= s.name %> (<%= s.prices.count %>)
+    <% end %>
+  </li>
+  <% end %>
+<% end %>
+</ul>

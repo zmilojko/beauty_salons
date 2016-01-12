@@ -1,0 +1,124 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+$font-light: 300;
+$border-radius-base: 2px;
+$btn-default-bg:#7352B3; /**#7842dd;**/
+$link-color: $btn-default-bg;
+$input-border-focus:lighten( $btn-default-bg, 20% );
+$btn-default-color:#fff;
+$btn-default-border:$btn-default-bg;
+$font-family-sans-serif:  "Lato", Helvetica, Arial, sans-serif !default;
+$navbar-inverse-link-color:rgba(255,255,255,0.8);
+$navbar-inverse-link-hover-color:#fff;
+$navbar-margin-bottom:0;
+$header-footer-margin: 40px;
+$navbar-border-radius: 0;
+@import "bootstrap-sprockets";
+@import "bootstrap";
+.navbar-nav > li > a{
+    text-transform: uppercase;
+}
+body{
+  background-color: #f8f8f8;
+}
+#map_canvas{
+  min-height: 400px;
+}
+img{
+  max-width: 100%;
+}
+.panel.salon h3.title{
+  margin: 0 0 4px 0;
+}
+.panel.salon span.address{
+  margin-bottom: 6px;
+  display: inline-block;
+}
+.panel-services .panel-body{
+  padding: 0;
+}
+.panel-services .panel-body ul li{
+  border-bottom: 1px solid #ececec;
+  margin: 0;
+}
+img.salon_list_image{
+  max-width: calc(100% + 30px);
+  margin: -15px;
+}
+.logo{
+  font-family: 'Poiret One', cursive;
+  color: #fff;
+  font-size: 30px;
+}
+.logo span{
+  color: #8D61E0;
+}
+h3.lead{
+  font-weight: $font-light;
+  margin-top: 0;
+  font-size: 26px;
+}
+footer{
+  margin-top: $header-footer-margin;
+  padding: $header-footer-margin 0;
+  color: $navbar-inverse-link-color;
+}
+footer.navbar-inverse{
+  border-top:4px solid $btn-default-bg;
+}
+footer .glyphicon{
+  margin-right: 4px;
+}
+footer .table.contact td{
+  line-height: 1.8;
+  padding: 6px;
+  border-bottom: 1px solid #5F5F5F;
+  border-top: none;
+}
+footer h3{
+  margin-top: 0;
+  line-height: 1;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: $font-light;
+}
+footer h3:after{
+  width: 100%;
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #656565;
+  margin-top: 20px;
+}
+div.copyright{
+  background-color: #171717;
+  color: darken($navbar-inverse-link-color,40%);
+  padding: $padding-large-vertical 0;
+  border-top: 1px solid #353535;
+}
+.navbar-inverse .form-control{
+  background-color: transparent;
+  color: $navbar-inverse-link-hover-color;
+}
+.navbar-purple{
+  margin-bottom: $header-footer-margin;
+  background-color: $btn-default-bg;
+}
+.panel-heading .btn{
+  line-height: 39px;
+  padding: 0 20px;
+  margin: -10px -15px;
+}
