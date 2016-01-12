@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+$font-light: 300;
 $border-radius-base: 2px;
 $btn-default-bg:#7352B3; /**#7842dd;**/
 $link-color: $btn-default-bg;
@@ -57,7 +58,7 @@ img.salon_list_image{
   max-width: calc(100% + 30px);
   margin: -15px;
 }
-.navbar-inverse .navbar-brand.logo{
+.logo{
   font-family: 'Poiret One', cursive;
   color: #fff;
   font-size: 30px;
@@ -66,12 +67,51 @@ img.salon_list_image{
   color: #8D61E0;
 }
 h3.lead{
-  font-weight: 300;
+  font-weight: $font-light;
   margin-top: 0;
   font-size: 26px;
 }
 footer{
   margin-top: $header-footer-margin;
+  padding: $header-footer-margin 0;
+  color: $navbar-inverse-link-color;
+}
+footer.navbar-inverse{
+  border-top:4px solid $btn-default-bg;
+}
+footer .glyphicon{
+  margin-right: 4px;
+}
+footer .table.contact td{
+  line-height: 1.8;
+  padding: 6px;
+  border-bottom: 1px solid #5F5F5F;
+  border-top: none;
+}
+footer h3{
+  margin-top: 0;
+  line-height: 1;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: $font-light;
+}
+footer h3:after{
+  width: 100%;
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #656565;
+  margin-top: 20px;
+}
+div.copyright{
+  background-color: #171717;
+  color: $navbar-inverse-link-color;
+  padding: $padding-large-vertical 0;
+  border-top: 1px solid #353535;
+}
+.navbar-inverse .form-control{
+  background-color: transparent;
+  color: $navbar-inverse-link-hover-color;
 }
 .navbar-purple{
   margin-bottom: $header-footer-margin;
