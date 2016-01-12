@@ -1,3 +1,5 @@
+
 <%= render 'form' %>
-<%= link_to 'Show', @salon %> |
-<%= link_to 'Back', salons_path %>
+<% @salon.prices.each do |p| %>
+  <%= p.service.name %> / <%= p.price.inspect %>
+<% end %>

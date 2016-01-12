@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>Beautysalons</title>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,700,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="//maps.googleapis.com/maps/api/js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -17,31 +19,43 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">MOJALEPOTA</a>
+        <a class="navbar-brand logo" href="/">MOJA<span>LEPOTA</span></a>
       </div>
-      <div id="navbar" class="navbar-collapse collapse navbar-right">
+      <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><%= link_to "Salons", salons_path %></li>
-          <li><%= link_to "Prices", prices_path %></li>
-          <li><%= link_to "Services", services_path %></li>
+          <li><%= link_to "Saloni", salons_path %></li>
+          <li><%= link_to "Cene", prices_path %></li>
+          <li><%= link_to "Usluge", services_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- admin menu will go here -->
+          <li><%= link_to "Saloni", salons_path %></li>
+          <li><%= link_to "Cene", prices_path %></li>
+          <li><%= link_to "Usluge", services_path %></li>
+          <!-- admin menu will go here -->
         </ul>
       </div>
     </div>
   </nav>
+  <div class="navbar navbar-purple">
+    <div class="container">
+      <div class="row">
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <%= yield %>
-      </div>
-      <div class="col-md-3">
+      <aside class="col-md-3">
+        <h3 class="lead">Usluge</h3>
         <div class="panel panel-default panel-services">
-          <div class="panel-heading">Usluge</div>
+          <!--<div class="panel-heading">Usluge:</div>-->
           <div class="panel-body">
             <%= render 'prices/countservices', :@prices => Price.all %>
           </div>
         </div>
+        <h3 class="lead">Login</h3>
         <div class="panel panel-default panel-login">
-          <div class="panel-heading">Login</div>
+          <!--<div class="panel-heading">Login</div>-->
           <div class="panel-body">
             <form role="form">
               <div class="form-group">
@@ -59,8 +73,27 @@
             </form>
           </div>
         </div>
+      </aside>
+      <div class="col-md-9">
+        <%= yield %>
       </div>
     </div>
   </div>
+  <footer class="navbar-inverse">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere rutrum turpis vitae mattis. Morbi risus ligula, pellentesque sed est non, mollis laoreet orci. Vestibulum urna justo, hendrerit et erat id, interdum sodales velit. Nunc sit amet ante vestibulum, tempus elit non, bibendum leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam pellentesque auctor neque sed suscipit. Aenean iaculis, nulla sit amet sollicitudin volutpat, nibh erat consectetur ante, id tempor erat odio commodo mauris. Nulla maximus tincidunt ultrices. Duis condimentum sit amet urna eget mattis. Duis cursus eros mi, sit amet vulputate ex tincidunt ac. </p>
+        </div>
+        <div class="col-md-3">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere rutrum turpis vitae mattis. Morbi risus ligula, pellentesque sed est non, mollis laoreet orci. Vestibulum urna justo, hendrerit et erat id, interdum sodales velit. Nunc sit amet ante vestibulum, tempus elit non, bibendum leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam pellentesque auctor neque sed suscipit. Aenean iaculis, nulla sit amet sollicitudin volutpat, nibh erat consectetur ante, id tempor erat odio commodo mauris. Nulla maximus tincidunt ultrices. Duis condimentum sit amet urna eget mattis. Duis cursus eros mi, sit amet vulputate ex tincidunt ac. </p>
+        </div><div class="col-md-3">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere rutrum turpis vitae mattis. Morbi risus ligula, pellentesque sed est non, mollis laoreet orci. Vestibulum urna justo, hendrerit et erat id, interdum sodales velit. Nunc sit amet ante vestibulum, tempus elit non, bibendum leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam pellentesque auctor neque sed suscipit. Aenean iaculis, nulla sit amet sollicitudin volutpat, nibh erat consectetur ante, id tempor erat odio commodo mauris. Nulla maximus tincidunt ultrices. Duis condimentum sit amet urna eget mattis. Duis cursus eros mi, sit amet vulputate ex tincidunt ac. </p>
+        </div><div class="col-md-3">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere rutrum turpis vitae mattis. Morbi risus ligula, pellentesque sed est non, mollis laoreet orci. Vestibulum urna justo, hendrerit et erat id, interdum sodales velit. Nunc sit amet ante vestibulum, tempus elit non, bibendum leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam pellentesque auctor neque sed suscipit. Aenean iaculis, nulla sit amet sollicitudin volutpat, nibh erat consectetur ante, id tempor erat odio commodo mauris. Nulla maximus tincidunt ultrices. Duis condimentum sit amet urna eget mattis. Duis cursus eros mi, sit amet vulputate ex tincidunt ac. </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

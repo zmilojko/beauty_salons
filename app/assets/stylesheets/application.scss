@@ -13,12 +13,25 @@
  *= require_tree .
  *= require_self
  */
-/**$border-radius-base: 0;
-$btn-default-bg:#7842dd;
+$border-radius-base: 2px;
+$btn-default-bg:#7352B3; /**#7842dd;**/
+$link-color: $btn-default-bg;
+$input-border-focus:lighten( $btn-default-bg, 20% );
 $btn-default-color:#fff;
-$btn-default-border:$btn-default-bg;**/
+$btn-default-border:$btn-default-bg;
+$font-family-sans-serif:  "Lato", Helvetica, Arial, sans-serif !default;
+$navbar-inverse-link-color:rgba(255,255,255,0.8);
+$navbar-inverse-link-hover-color:#fff;
+$navbar-margin-bottom:0;
+$header-footer-margin: 40px;
 @import "bootstrap-sprockets";
 @import "bootstrap";
+.navbar-nav > li > a{
+    text-transform: uppercase;
+}
+body{
+  background-color: #f8f8f8;
+}
 #map_canvas{
   min-height: 400px;
 }
@@ -32,13 +45,39 @@ img{
   margin-bottom: 6px;
   display: inline-block;
 }
-.panel-services ul{
-  list-style: none;
+.panel-services .panel-body{
   padding: 0;
+}
+.panel-services .panel-body ul li{
+  border-bottom: 1px solid #ececec;
   margin: 0;
 }
-.panel-services ul li{
-  margin-bottom: 6px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #ececec;
+img.salon_list_image{
+  max-width: calc(100% + 30px);
+  margin: -15px;
+}
+.navbar-inverse .navbar-brand.logo{
+  font-family: 'Poiret One', cursive;
+  color: #fff;
+  font-size: 30px;
+}
+.logo span{
+  color: #8D61E0;
+}
+h3.lead{
+  font-weight: 300;
+  margin-top: 0;
+  font-size: 26px;
+}
+footer{
+  margin-top: $header-footer-margin;
+}
+.navbar-purple{
+  margin-bottom: $header-footer-margin;
+  background-color: $btn-default-bg;
+}
+.panel-heading .btn{
+  line-height: 39px;
+  padding: 0 20px;
+  margin: -10px -15px;
 }

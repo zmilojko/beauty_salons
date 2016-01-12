@@ -10,6 +10,7 @@ class PricesController < ApplicationController
   # GET /prices/1
   # GET /prices/1.json
   def show
+    @test = 'test'
   end
 
   # GET /prices/new
