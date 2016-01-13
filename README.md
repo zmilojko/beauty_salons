@@ -35,3 +35,8 @@ This app will show you all the salons with all their prices and services.
 - Sort salons by service price on single service page
 - Add logo image to salon
 - Style single salon page
+
+
+## To update databse please run:
+- rake db:drop db:create db:migrate
+- rake db:seed
