@@ -1,0 +1,74 @@
+= form_for(@salon) do |f|
+  - if @salon.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@salon.errors.count, "error")
+        prohibited this salon from being saved:
+      %ul
+        - @salon.errors.full_messages.each do |message|
+          %li= message
+  .panel.panel-default
+    .panel-heading
+      Now editing:
+      %b= @salon.name
+    .panel-body
+      .form-group
+        = f.label :name
+        %br
+          = f.text_field :name, :class => "form-control", :required => true
+      .form-group
+        = f.label :permalink
+        %br
+          = f.text_field :permalink, :class => "form-control", :required => true
+      .form-group
+        = f.label :address
+        %br
+          = f.text_field :address, :class => "form-control", :required => true
+      .form-group
+        = f.label :description
+        %br
+          = f.text_area :description, :rows => 5, :class => "form-control", :required => true
+      .form-group.hidden
+        = f.label :lat
+        %br
+          = f.text_field :lat, :class => "form-control"
+      .form-group.hidden
+        = f.label :lng
+        %br
+          = f.text_field :lng, :class => "form-control"
+      .form-group
+        %label Location:
+        %br
+          #map_canvas.form-control
+      - if f.object.lat.nil?
+        - lat = 44.797638270
+      - else
+        - lat = f.object.lat
+      - if f.object.lng.nil?
+        - lng = 20.445800781
+      - else
+        - lng = f.object.lng
+      :javascript
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            zoom: 15,
+            center: new google.maps.LatLng( #{lat} , #{lng} ),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var myMarker = new google.maps.Marker({
+            position: new google.maps.LatLng( #{lat} , #{lng} ),
+            draggable: true
+        });
+
+        google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+          var salon_lat = document.getElementById("salon_lat");
+        salon_lat.value = evt.latLng.lat().toFixed(9);
+
+        var salon_lng = document.getElementById("salon_lng");
+        salon_lng.value = evt.latLng.lng().toFixed(9);
+        });
+        map.setCenter(myMarker.position);
+        myMarker.setMap(map);
+
+      .actions
+        = f.submit 'Update', :class => 'btn btn-success'

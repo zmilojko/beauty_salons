@@ -1,0 +1,34 @@
+/ <p id="notice"><haml:loud> notice </haml:loud></p>
+%h3.lead.pull-left= @service.name
+.dropdown.pull-right
+  Prikaži prvo:
+  %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+    - if @sort == "skuplji"
+      skuplje
+    - else
+      jeftinije
+    %span.caret
+  %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+    %li= link_to 'prvo jeftinije', url_for()
+    %li= link_to 'prvo skuplji', url_for( :sort => 'skuplji' )
+.clearfix
+- @salons.each do |salon|
+  .panel.panel-default.salon
+    .panel-body
+      .row
+        .col-md-4
+          = image_tag("default.png", :class => "salon_list_image")
+        .col-md-8
+          %h3.title
+            = salon.name
+            %span.pull-right.label.label-default
+              = salon.prices.find_by(service_id: @service.id).price
+              %span RSD
+          %span.address= salon.address
+          %p= salon.description
+          .pull-right
+            = link_to 'Pogledaj salon', salon,  class: "btn btn-default"
+            = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
+            = link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+= link_to 'Edit this service', edit_service_path(@service),  class: "btn btn-warning"
+= link_to 'New Service', new_service_path,  class: "btn btn-success"

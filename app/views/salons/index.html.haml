@@ -1,0 +1,17 @@
+- if notice
+  %p#notice= notice
+- @salons.each do |salon|
+  .panel.panel-default.salon
+    .panel-body
+      .row
+        .col-md-4
+          = image_tag("default.png", :class => "salon_list_image")
+        .col-md-8
+          %h3.title= salon.name
+          %span.address= salon.address
+          %p= salon.description
+          .pull-right
+            = link_to 'Pogledaj salon', salon,  class: "btn btn-default"
+            = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
+            = link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+= link_to 'New Salon', new_salon_path, class: "btn btn-success pull-right"

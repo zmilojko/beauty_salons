@@ -1,0 +1,114 @@
+!!!
+%html
+  %head
+    %title Beautysalons
+    %link{:href => "https://fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,700,900&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
+      %link{:href => "https://fonts.googleapis.com/css?family=Poiret+One", :rel => "stylesheet", :type => "text/css"}
+        = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+        = javascript_include_tag 'application', 'data-turbolinks-track' => true
+        %script{:src => "//maps.googleapis.com/maps/api/js"}
+        = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse
+      .container
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand.logo{:href => "/"}
+            MOJA
+            %span LEPOTA
+        #navbar.navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li= link_to "Saloni", salons_path
+            %li= link_to "Cene", prices_path
+            %li= link_to "Usluge", services_path
+          %ul.nav.navbar-nav.navbar-right
+            / admin menu will go here
+            %li= link_to "Saloni", salons_path
+            %li= link_to "Cene", prices_path
+            %li= link_to "Usluge", services_path
+            / admin menu will go here
+    .navbar.navbar-purple
+      .container
+        .row
+    .container
+      .row
+        %aside.col-md-3
+          %h3.lead Usluge
+          .panel.panel-default.panel-services
+            / <div class="panel-heading">Usluge:</div>
+            .panel-body
+              = render 'prices/countservices'
+          %h3.lead Login
+          .panel.panel-default.panel-login
+            / <div class="panel-heading">Login</div>
+            .panel-body
+              %form{:role => "form"}
+                .form-group
+                  %label{:for => "email"} Email:
+                  %input#email.form-control{:placeholder => "Enter email", :type => "email"}
+                .form-group
+                  %label{:for => "pwd"} Password:
+                  %input#pwd.form-control{:placeholder => "Enter password", :type => "password"}
+                .checkbox
+                  %label
+                    %input{:type => "checkbox"} Remember me
+                %button.btn.btn-default{:type => "submit"} Submit
+        .col-md-9
+          = yield
+    %footer.navbar-inverse
+      .container
+        .row
+          .col-md-3
+            %h3.logo
+              MOJA
+              %span LEPOTA
+            %p Dobrodošli na poral mojalepota.com! Ovaj portal namenjen je svima onima koji žele da pronađu kozmetičku uslugu po svojoj meri!
+            %p Besplatnom registracijom, dobijate mogućnost pretrage salona i usluga i po udaljenosti! Kao i mogućnost praćenja salona i njihovih ponuda. Kao što smo rekli, registracija je potpuno besplatna.
+          .col-md-3
+            %h3 Budite u toku!
+            %p Registrujte svoju email adresu koristeći kontakt formu, i budite uvek u toku sa najnovijim ponudama!
+            %form{:role => "form"}
+              .form-group
+                %input#email.form-control{:placeholder => "Unesite ovde Vašu email adrese", :type => "email"}
+              %button.btn.btn-default{:type => "submit"} PRIJAVA
+          .col-md-3
+            %h3 Izdvajamo iz ponude
+            %p INSERT SALONS HERE LATER
+          .col-md-3
+            %h3 Kontakt
+            %table.table.contact
+              %tr
+                %td
+                  %span.glyphicon.glyphicon-map-marker>
+                  Adresa:
+                %td
+                  Karađorđeva 6/153
+                  %br 11080, Beograd, Srbija
+              %tr
+                %td
+                  %span.glyphicon.glyphicon-envelope>
+                  Email:
+                %td office@mojalepota.com
+              %tr
+                %td
+                  %span.glyphicon.glyphicon-phone>
+                  Telefon:
+                %td +381 (60) 6629 - 098
+              %tr
+                %td
+                  %span.glyphicon.glyphicon-headphones>
+                  Podrška:
+                %td
+                  +381 (60) 6629 - 098
+                  %br podrska@mojalepota.com
+    .copyright
+      .container
+        .row
+          .col-md-6.text-left
+            Developed by PIXEL2GO.COM
+          .col-md-6.text-right
+            2015 &copy; All rights recieved.

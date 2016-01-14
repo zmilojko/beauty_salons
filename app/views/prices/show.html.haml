@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Price:
+  = @price.price
+%p
+  %strong Salon:
+  = @price.salon.name
+%p
+  %strong Service:
+  = @price.service.name
+= link_to 'Edit', edit_price_path(@price)
+|
+\#{link_to 'Back', prices_path}

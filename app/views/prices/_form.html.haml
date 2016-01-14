@@ -1,0 +1,23 @@
+= form_for(@price) do |f|
+  - if @price.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@price.errors.count, "error")
+        prohibited this price from being saved:
+      %ul
+        - @price.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :price
+    %br
+      = f.number_field :price
+  .field
+    = f.label :salon_id
+    %br
+      = f.select :salon_id, Salon.all.collect {|x| [x.name, x.id]}, {}
+  .field
+    = f.label :service_id
+    %br
+      = f.select :service_id, Service.all.collect {|x| [x.name, x.id]}, {}
+  .actions
+    = f.submit
