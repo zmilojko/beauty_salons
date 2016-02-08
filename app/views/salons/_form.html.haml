@@ -13,6 +13,10 @@
       %b= @salon.name
     .panel-body
       .form-group
+        = f.label :image
+        %br
+          = f.file_field :image
+      .form-group
         = f.label :name
         %br
           = f.text_field :name, :class => "form-control", :required => true
