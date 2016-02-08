@@ -28,7 +28,7 @@
               = salon.prices.find_by(service_id: @service.id).price
               %span RSD
           %span.address= salon.address
-          %p= salon.description
+          %p= truncate(salon.description, :length => 200)
           .pull-right
             = link_to 'Pogledaj salon', salon,  class: "btn btn-default"
             = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
