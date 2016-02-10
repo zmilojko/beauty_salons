@@ -11,6 +11,10 @@
             = image_tag("default.png", :class => "salon_list_image")
         .col-md-8
           %h3.title= salon.name
+          %span.pull-right.label.label-success
+            = salon.sorted_by_distance.round(2)
+            %span km
+          &nbsp;
           %span.address= salon.address
           %p= truncate(salon.description, :length => 200)
           .pull-right

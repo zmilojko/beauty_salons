@@ -1,7 +1,14 @@
 class Salon < ActiveRecord::Base
+  include DistanceModule
+
   def to_param
     permalink
   end
+
+  def self.sorted_by_distance
+    Salon.all.sort_by(&:sorted_by_distance)
+  end
+
   has_attached_file :image,
   :path => ":rails_root/public/system/:attachment/:id/:style-:filename",
   :url => "/system/:attachment/:id/:style-:filename",

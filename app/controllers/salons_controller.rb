@@ -4,7 +4,7 @@ class SalonsController < ApplicationController
   # GET /salons
   # GET /salons.json
   def index
-    @salons = Salon.all
+    @salons = Salon.all.sorted_by_distance
   end
 
   # GET /salons/1

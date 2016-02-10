@@ -11,6 +11,8 @@
   %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
     %li= link_to 'prvo jeftinije', url_for()
     %li= link_to 'prvo skuplji', url_for( :sort => 'skuplji' )
+    %li= # link_to 'bliže', url_for( :sort => 'blizi' )
+    %li= # link_to 'dalji', url_for( :sort => 'dalji' )
 .clearfix
 - @salons.each do |salon|
   .panel.panel-default.salon
@@ -24,6 +26,10 @@
         .col-md-8
           %h3.title
             = salon.name
+            %span.pull-right.label.label-success
+              = salon.sorted_by_distance.round(2)
+              %span km
+            &nbsp;
             %span.pull-right.label.label-default
               = salon.prices.find_by(service_id: @service.id).price
               %span RSD
