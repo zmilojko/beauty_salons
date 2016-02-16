@@ -9,6 +9,28 @@
         %script{:src => "//maps.googleapis.com/maps/api/js"}
         = csrf_meta_tags
   %body
+
+    :javascript
+      var x = document.getElementById("demo");
+      function getLocation() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+              //x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+      }
+      function showPosition(position) {
+          // LAT
+          document.cookie="lat="+position.coords.latitude;
+          console.log(position.coords.latitude);
+
+          // LNG
+          document.cookie="lng="+position.coords.longitude;
+          console.log(position.coords.longitude);
+      }
+
+    <div id="demo">TEST</div>
+    <button class="w3-btn w3-blue" onclick="getLocation()">Try It</button>
     %nav.navbar.navbar-inverse
       .container
         .navbar-header
@@ -18,8 +40,7 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand.logo{:href => "/"}
-            MOJA
-            %span LEPOTA
+            MOJA<span>LEPOTA</span>
         #navbar.navbar-collapse.collapse
           %ul.nav.navbar-nav
             %li= link_to "Saloni", salons_path
@@ -34,6 +55,10 @@
     .navbar.navbar-purple
       .container
         .row
+          .col-md-9
+            <input type="text">
+          .col-md-3
+            <button>Search</button>
     .container
       .row
         %aside.col-md-3
