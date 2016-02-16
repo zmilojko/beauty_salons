@@ -1,6 +1,7 @@
 - if notice
   %p#notice= notice
 - @salons.each do |salon|
+  =@d
   .panel.panel-default.salon
     .panel-body
       .row
@@ -12,7 +13,7 @@
         .col-md-8
           %h3.title= salon.name
           %span.pull-right.label.label-success
-            = salon.sorted_by_distance.round(2)
+        
             %span km
           &nbsp;
           %span.address= salon.address

@@ -3,8 +3,11 @@ class SalonsController < ApplicationController
 
   # GET /salons
   # GET /salons.json
+
+
   def index
-    @salons = Salon.all.sorted_by_distance
+    @d = sorted_by_distance(1,1,cookies[:lat].to_f,cookies[:lng].to_f)
+    @salons = Salon.all.sort_by(sorted_by_distance(:mylat => cookies[:lat].to_f, :mylng => cookies[:lng].to_f))
   end
 
   # GET /salons/1
