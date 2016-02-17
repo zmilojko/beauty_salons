@@ -10,6 +10,7 @@ class ServicesController < ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
+    @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
     @param = params[:id]
     @sort = params[:sort]
     @services = Service.find_by(slug: params[:id])

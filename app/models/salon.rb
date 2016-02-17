@@ -1,7 +1,12 @@
 class Salon < ActiveRecord::Base
+  include Distance
 
   def to_param
     permalink
+  end
+
+  def distance_to(target)
+    calculate_distance(self.lng, self.lat, target[:lng], target[:lat])
   end
 
   has_attached_file :image,

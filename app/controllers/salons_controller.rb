@@ -6,8 +6,9 @@ class SalonsController < ApplicationController
 
 
   def index
-    @d = sorted_by_distance(1,1,cookies[:lat].to_f,cookies[:lng].to_f)
-    @salons = Salon.all.sort_by(sorted_by_distance(:mylat => cookies[:lat].to_f, :mylng => cookies[:lng].to_f))
+    @cooke = cookies[:test]
+    @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
+    @salons = Salon.all.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
   end
 
   # GET /salons/1

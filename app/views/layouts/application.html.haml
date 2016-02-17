@@ -27,10 +27,10 @@
           // LNG
           document.cookie="lng="+position.coords.longitude;
           console.log(position.coords.longitude);
-      }
 
-    <div id="demo">TEST</div>
-    <button class="w3-btn w3-blue" onclick="getLocation()">Try It</button>
+          // RELOAD PAGE TO IMPLEMENT CHANGES
+          location.reload();
+      }
     %nav.navbar.navbar-inverse
       .container
         .navbar-header
@@ -46,6 +46,9 @@
             %li= link_to "Saloni", salons_path
             %li= link_to "Cene", prices_path
             %li= link_to "Usluge", services_path
+            %li
+              %a{ :href => "#", :title => "Meet the Team" , :onclick => "getLocation()"}
+                LOKACIJA
           %ul.nav.navbar-nav.navbar-right
             / admin menu will go here
             %li= link_to "Saloni", salons_path
