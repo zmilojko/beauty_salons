@@ -11,7 +11,11 @@
   %body
 
     :javascript
-      var x = document.getElementById("demo");
+      function removeLocation(){
+        document.cookie = 'lat=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = 'lng=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        location.reload();
+      }
       function getLocation() {
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(showPosition);
@@ -21,11 +25,11 @@
       }
       function showPosition(position) {
           // LAT
-          document.cookie="lat="+position.coords.latitude;
+          document.cookie="lat="+position.coords.latitude+";path=/";
           console.log(position.coords.latitude);
 
           // LNG
-          document.cookie="lng="+position.coords.longitude;
+          document.cookie="lng="+position.coords.longitude+";path=/";
           console.log(position.coords.longitude);
 
           // RELOAD PAGE TO IMPLEMENT CHANGES
@@ -46,9 +50,14 @@
             %li= link_to "Saloni", salons_path
             %li= link_to "Cene", prices_path
             %li= link_to "Usluge", services_path
-            %li
-              %a{ :href => "#", :title => "Meet the Team" , :onclick => "getLocation()"}
-                LOKACIJA
+            - if !location_is_know
+              %li
+                %a{:onclick => "getLocation()"}
+                  LOKACIJA
+            - else
+              %li
+                %a{:onclick => "removeLocation()"}
+                  OBRIŠI LOKACIJA
           %ul.nav.navbar-nav.navbar-right
             / admin menu will go here
             %li= link_to "Saloni", salons_path

@@ -10,10 +10,12 @@
           - else
             = image_tag("default.png", :class => "salon_list_image")
         .col-md-8
-          %h3.title= salon.name
-          %span.pull-right.label.label-success
-            = salon.distance_to(@target).round(2)
-            %span km
+          %h3.title
+            = salon.name
+            - if location_is_know
+              %span.pull-right.label.label-success
+                = salon.distance_to(@target).round(2)
+                %span km
           &nbsp;
           %span.address= salon.address
           %p= truncate(salon.description, :length => 200)
