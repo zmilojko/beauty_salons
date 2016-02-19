@@ -12,14 +12,18 @@
 
     :javascript
       function removeLocation(){
-        document.cookie = 'lat=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = 'lng=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        location.reload();
+        document.getElementById("removeLocation").innerHTML = '<span class="glyphicon glyphicon-refresh spinning"></span>Brisanje lokacije';
+        document.cookie = 'lat=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = 'lng=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        setTimeout(location.reload(), 2000);
+
       }
       function getLocation() {
+          document.getElementById("getLocation").innerHTML = '<span class="glyphicon glyphicon-refresh spinning"></span>Preuzimanje lokacije';
+
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(showPosition);
-          } 
+          }
       }
       function showPosition(position) {
           // LAT
@@ -33,6 +37,7 @@
           // RELOAD PAGE TO IMPLEMENT CHANGES
           location.reload();
       }
+    <p style="display:none;" data-toggle="modal" data-target="#myModal">Open Modal</p>
     %nav.navbar.navbar-inverse
       .container
         .navbar-header
@@ -44,24 +49,18 @@
           %a.navbar-brand.logo{:href => "/"}
             MOJA<span>LEPOTA</span>
         #navbar.navbar-collapse.collapse
-          %ul.nav.navbar-nav
-            %li= link_to "Saloni", salons_path
-            %li= link_to "Cene", prices_path
-            %li= link_to "Usluge", services_path
+          %ul.nav.navbar-nav.navbar-right
             - if !location_is_know
               %li
-                %a{:onclick => "getLocation()"}
-                  LOKACIJA
+                %a{:id => "getLocation" , :href => "#", :onclick => "getLocation()"}
+                  PREUZMI LOKACIJU
             - else
               %li
-                %a{:onclick => "removeLocation()"}
-                  OBRIŠI LOKACIJA
-          %ul.nav.navbar-nav.navbar-right
-            / admin menu will go here
+                %a{:id => "removeLocation" , :href => "#", :onclick => "removeLocation()"}
+                  OBRIŠI LOKACIJU
             %li= link_to "Saloni", salons_path
             %li= link_to "Cene", prices_path
             %li= link_to "Usluge", services_path
-            / admin menu will go here
     .navbar.navbar-purple
       .container
         .row
