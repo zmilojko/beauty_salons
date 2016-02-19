@@ -53,11 +53,13 @@
             - if !location_is_know
               %li
                 %a{:id => "getLocation" , :href => "#", :onclick => "getLocation()"}
+                  %span.glyphicon.glyphicon-map-marker
                   PREUZMI LOKACIJU
             - else
               %li
                 %a{:id => "removeLocation" , :href => "#", :onclick => "removeLocation()"}
-                  OBRIŠI LOKACIJU
+                  %span.glyphicon.glyphicon-map-marker
+                  ZABORAVI LOKACIJU
             %li= link_to "Saloni", salons_path
             %li= link_to "Cene", prices_path
             %li= link_to "Usluge", services_path
