@@ -5,6 +5,10 @@ class Salon < ActiveRecord::Base
     permalink
   end
 
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%") 
+  end
+
   def distance_to(target)
     calculate_distance(self.lng, self.lat, target[:lng], target[:lat])
   end

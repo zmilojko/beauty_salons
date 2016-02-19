@@ -1,0 +1,42 @@
+- if notice
+  %p#notice= notice
+- if location_is_know
+  %h3.lead.pull-left
+    Udaljenost
+  .dropdown.pull-right
+    Prikaži prvo:
+    %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      - if @sort == "dalje"
+        dalje
+      - else
+        bliže
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+      %li= link_to 'prvo bliže', url_for()
+      %li= link_to 'prvo dalje', url_for( :sort => 'dalje' )
+  .clearfix
+- @salons.each do |salon|
+  = @params
+  .panel.panel-default.salon
+    .panel-body
+      .row
+        .col-md-4
+          - if salon.image.exists?
+            = image_tag salon.image.url(:preview),:class => "salon_list_image"
+          - else
+            = image_tag("default.png", :class => "salon_list_image")
+        .col-md-8
+          %h3.title
+            = salon.name
+            - if location_is_know
+              %span.pull-right.label.label-success
+                = # salon.distance_to(@target).round(2)
+                %span km
+          &nbsp;
+          %span.address= salon.address
+          %p= truncate(salon.description, :length => 200)
+          .pull-right
+            = link_to 'Pogledaj salon', salon,  class: "btn btn-default"
+            = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
+            = link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+= link_to 'New Salon', new_salon_path, class: "btn btn-success pull-right"

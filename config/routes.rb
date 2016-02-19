@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :prices
 
   get "/saloni" => "salons#index", as: "salons"
+  get "/saloni/pretraga" => "salons#search", as: "search_salons"
   post "/saloni" => "salons#create"
   get "/salon/new" => "salons#new", as: "new_salon"
   get "/salon/:id/edit" => "salons#edit", as: "edit_salon"

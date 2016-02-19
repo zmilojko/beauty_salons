@@ -66,10 +66,10 @@
     .navbar.navbar-purple
       .container
         .row
-          .col-md-9
-            <input type="text">
-          .col-md-3
-            <button>Search</button>
+          .col-md-12
+            = form_tag(search_salons_path, :enforce_utf8 => false, :method => "get", id: "search-form") do
+              = text_field_tag :search, params[:search], placeholder: "Search Salons"
+            = submit_tag "Search"
     .container
       .row
         %aside.col-md-3

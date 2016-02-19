@@ -3,7 +3,15 @@ class SalonsController < ApplicationController
 
   # GET /salons
   # GET /salons.json
-
+  def search
+    @salons = Salon.all
+    @params = params[:search]
+    if params[:search]
+      @salons = Salon.search(params[:search]).order("created_at DESC")
+    else
+      @salons = Salon.all.order('created_at DESC')
+    end
+  end
 
   def index
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
