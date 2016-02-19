@@ -3,16 +3,21 @@
 .dropdown.pull-right
   Prikaži prvo:
   %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+    - if !@sort
+      jeftinije
     - if @sort == "skuplji"
       skuplje
-    - else
-      jeftinije
+    - if @sort == "blizi"
+      bliže
+    - if @sort == "dalji"
+      dalje
     %span.caret
   %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
     %li= link_to 'prvo jeftinije', url_for()
     %li= link_to 'prvo skuplji', url_for( :sort => 'skuplji' )
-    %li= # link_to 'bliže', url_for( :sort => 'blizi' )
-    %li= # link_to 'dalji', url_for( :sort => 'dalji' )
+    - if location_is_know
+      %li= link_to 'prvo bliže', url_for( :sort => 'blizi' )
+      %li= link_to 'prvo dalje', url_for( :sort => 'dalji' )
 .clearfix
 - @salons.each do |salon|
   .panel.panel-default.salon

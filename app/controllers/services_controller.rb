@@ -13,8 +13,18 @@ class ServicesController < ApplicationController
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
     @param = params[:id]
     @sort = params[:sort]
-    @services = Service.find_by(slug: params[:id])
-    @salons = @services.salons.joins(:prices).reorder("prices.price #{@sort == 'skuplji' ? 'DESC' : 'ASC'}").distinct
+
+    @services = Service.find_by(slug: params[:id]).salons.joins(:prices).distinct
+    @salons = @services.reorder("prices.price #{@sort == 'skuplji' ? 'DESC' : 'ASC'}")
+
+    if @sort == 'blizi' or @sort == 'dalji'
+      @salons = @services.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
+    end
+
+    if @sort == 'dalji'
+      @salons = @salons.reverse
+    end
+
 
 
   end
