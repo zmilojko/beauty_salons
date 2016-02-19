@@ -3,13 +3,13 @@
 .dropdown.pull-right
   Prikaži prvo:
   %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-    - if !@sort
+    - if !params[:sort]
       jeftinije
-    - if @sort == "skuplji"
+    - if params[:sort] == "skuplji"
       skuplje
-    - if @sort == "blizi"
+    - if params[:sort] == "blizi"
       bliže
-    - if @sort == "dalji"
+    - if params[:sort] == "dalji"
       dalje
     %span.caret
   %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}

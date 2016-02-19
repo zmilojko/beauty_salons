@@ -6,7 +6,7 @@
   .dropdown.pull-right
     Prikaži prvo:
     %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-      - if @sort == "dalje"
+      - if params[:sort] == "dalje"
         dalje
       - else
         bliže

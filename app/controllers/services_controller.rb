@@ -12,17 +12,15 @@ class ServicesController < ApplicationController
   def show
 
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
-    @param = params[:id]
-    @sort = params[:sort]
 
     @services = Service.find_by(slug: params[:id]).salons.joins(:prices).distinct
-    @salons = @services.reorder("prices.price #{@sort == 'skuplji' ? 'DESC' : 'ASC'}")
+    @salons = @services.reorder("prices.price #{params[:sort] == 'skuplji' ? 'DESC' : 'ASC'}")
 
-    if @sort == 'blizi' or @sort == 'dalji'
+    if params[:sort] == 'blizi' or params[:sort] == 'dalji'
       @salons = @services.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
     end
 
-    if @sort == 'dalji'
+    if params[:sort] == 'dalji'
       @salons = @salons.reverse
     end
 

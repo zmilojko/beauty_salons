@@ -5,7 +5,7 @@
     %h3.lead.pull-left.search
       Rezulati pretrage za:
       %b
-        = @params
+        = params[:search]
       %br
     %div.pull-left.search_count
       Pronađeno salona:
@@ -15,14 +15,14 @@
       .dropdown.pull-right.search
         Prikaži prvo:
         %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-          - if @sort == "dalje"
+          - if params[:sort] == "dalje"
             dalje
           - else
             bliže
           %span.caret
         %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
-          %li= link_to 'prvo bliže', url_for(:search => @params)
-          %li= link_to 'prvo dalje', url_for( :sort => 'dalje', :search => @params)
+          %li= link_to 'prvo bliže', url_for(:search => params[:search])
+          %li= link_to 'prvo dalje', url_for( :sort => 'dalje', :search => params[:search])
 .clearfix
 - @salons.each do |salon|
   .panel.panel-default.salon

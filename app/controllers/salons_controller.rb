@@ -1,14 +1,16 @@
 class SalonsController < ApplicationController
   before_action :set_salon, only: [:show, :edit, :update, :destroy]
 
-  # GET /salons
-  # GET /salons.json
   def search
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
     @salons = Salon.all
-    @params = params[:search]
     if params[:search]
       @salons = Salon.search(params[:search]).order("created_at DESC")
+      if params[:sort]=='dalje'
+        @salons = @salons.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }.reverse
+      else
+        @salons = @salons.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
+      end
     else
       @salons = Salon.all.order('created_at DESC')
     end
@@ -19,8 +21,7 @@ class SalonsController < ApplicationController
   def index
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
     @salons = Salon.all.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
-    @sort = params[:sort]
-    if @sort=="dalje"
+    if params[:sort]=="dalje"
       @salons = @salons.reverse
     end
   end
