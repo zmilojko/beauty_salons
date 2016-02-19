@@ -1,22 +1,30 @@
 - if notice
   %p#notice= notice
-- if location_is_know
-  %h3.lead.pull-left
-    Udaljenost
-  .dropdown.pull-right
-    Prikaži prvo:
-    %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-      - if @sort == "dalje"
-        dalje
-      - else
-        bliže
-      %span.caret
-    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
-      %li= link_to 'prvo bliže', url_for()
-      %li= link_to 'prvo dalje', url_for( :sort => 'dalje' )
-  .clearfix
+%div.row
+  %div.col-md-6
+    %h3.lead.pull-left.search
+      Rezulati pretrage za:
+      %b
+        = @params
+      %br
+    %div.pull-left.search_count
+      Pronađeno salona:
+      = @number_of_results
+  %div.col-md-6
+    - if location_is_know
+      .dropdown.pull-right.search
+        Prikaži prvo:
+        %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          - if @sort == "dalje"
+            dalje
+          - else
+            bliže
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+          %li= link_to 'prvo bliže', url_for(:search => @params)
+          %li= link_to 'prvo dalje', url_for( :sort => 'dalje', :search => @params)
+.clearfix
 - @salons.each do |salon|
-  = @params
   .panel.panel-default.salon
     .panel-body
       .row
@@ -30,7 +38,7 @@
             = salon.name
             - if location_is_know
               %span.pull-right.label.label-success
-                = # salon.distance_to(@target).round(2)
+                = salon.distance_to(@target).round(2)
                 %span km
           &nbsp;
           %span.address= salon.address

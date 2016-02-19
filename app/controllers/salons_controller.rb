@@ -4,6 +4,7 @@ class SalonsController < ApplicationController
   # GET /salons
   # GET /salons.json
   def search
+    @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
     @salons = Salon.all
     @params = params[:search]
     if params[:search]
@@ -11,6 +12,8 @@ class SalonsController < ApplicationController
     else
       @salons = Salon.all.order('created_at DESC')
     end
+
+    @number_of_results = @salons.count
   end
 
   def index
