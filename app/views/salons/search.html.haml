@@ -11,7 +11,7 @@
       Pronađeno salona:
       = @number_of_results
   %div.col-md-6
-    - if location_is_know
+    - if location_is_know and  @number_of_results != 1
       .dropdown.pull-right.search
         Prikaži prvo:
         %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
