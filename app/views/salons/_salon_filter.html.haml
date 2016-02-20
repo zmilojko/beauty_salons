@@ -1,31 +1,33 @@
 %div.col-md-6
-  - if location_is_know and @number_of_results != 1
-    .dropdown.pull-right.search
-      Prikaži prvo:
-      %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-        -if defined?(@service)
-          - if params[:sort] == "blizi"
-            bliže
-          - if params[:sort] == "dalji"
-            dalje
-          - if params[:sort] == "skuplji"
-            skluplje
-          - if !params[:sort]
-            jeftinije
-        -else
-          - if location_is_know
-            - if params[:sort] == "dalji"
-              dalje
-            - else
-              bliže
-        %span.caret
-      %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
-        - if location_is_know
+  - if @number_of_results.to_i > 1
+    - if (!current_page?(controller: 'salons', action: 'index') and !current_page?(controller: 'salons', action: 'search')) or location_is_know
+      .dropdown.pull-right.search
+        Prikaži prvo:
+        %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
           -if defined?(@service)
-            %li= link_to 'prvo bliže', url_for( params.merge(:sort => 'blizi' )  )
+            - if location_is_know
+              - if params[:sort] == "blizi"
+                bliže
+              - if params[:sort] == "dalji"
+                dalje
+            - if params[:sort] == "skuplji"
+              skluplje
+            - if !params[:sort]
+              jeftinije
           -else
-            %li= link_to 'prvo bliže', url_for(:search => params[:search])
-          %li= link_to 'prvo dalje', url_for( params.merge(:sort => 'dalji' ) )
-        -if defined?(@service)
-          %li= link_to 'prvo jeftinije', url_for()
-          %li= link_to 'prvo skuplje', url_for( :sort => 'skuplji' )
+            - if location_is_know
+              - if params[:sort] == "dalji"
+                dalje
+              - else
+                bliže
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+          - if location_is_know
+            -if defined?(@service)
+              %li= link_to 'prvo bliže', url_for( params.merge(:sort => 'blizi' )  )
+            -else
+              %li= link_to 'prvo bliže', url_for(:search => params[:search])
+            %li= link_to 'prvo dalje', url_for( params.merge(:sort => 'dalji' ) )
+          -if defined?(@service)
+            %li= link_to 'prvo jeftinije', url_for()
+            %li= link_to 'prvo skuplje', url_for( :sort => 'skuplji' )
