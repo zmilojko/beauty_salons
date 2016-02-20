@@ -20,10 +20,17 @@ class SalonsController < ApplicationController
 
   def index
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
-    @salons = Salon.all.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
-    if params[:sort]=="dalji"
-      @salons = @salons.reverse
+
+    if cookies[:lng] and cookies[:lat]
+      @salons = Salon.all.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
+      if params[:sort]=="dalji"
+        @salons = @salons.reverse
+      end
+    else
+      @salons = Salon.all.order('updated_at DESC')
     end
+
+
     @number_of_results = @salons.count
     @salons = @salons.paginate(:page => params[:strana])
   end
