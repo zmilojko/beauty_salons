@@ -1,5 +1,6 @@
 sr:
   hello: "Zdravo svete"
+  sort_by: "Prikaži prvo:"
   will_paginate:
     previous_label: "Prethodna"
     next_label: "Sledeća"
