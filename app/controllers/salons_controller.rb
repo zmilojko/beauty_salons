@@ -6,7 +6,7 @@ class SalonsController < ApplicationController
     @salons = Salon.all
     if params[:search]
       @salons = Salon.search(params[:search]).order("created_at DESC")
-      if params[:sort]=='dalje'
+      if params[:sort]=='dalji'
         @salons = @salons.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }.reverse
       else
         @salons = @salons.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
@@ -21,9 +21,10 @@ class SalonsController < ApplicationController
   def index
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}
     @salons = Salon.all.sort { |l,r| l.distance_to(@target) <=> r.distance_to(@target) }
-    if params[:sort]=="dalje"
+    if params[:sort]=="dalji"
       @salons = @salons.reverse
     end
+    @number_of_results = @salons.count
   end
 
   # GET /salons/1

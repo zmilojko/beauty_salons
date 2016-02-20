@@ -24,6 +24,8 @@ class ServicesController < ApplicationController
       @salons = @salons.reverse
     end
 
+    @number_of_results = @salons.count
+
 
 
   end
