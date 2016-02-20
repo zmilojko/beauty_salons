@@ -1,6 +1,6 @@
 %div.col-md-6
   - if @number_of_results.to_i > 1
-    - if (!current_page?(controller: 'salons', action: 'index') and !current_page?(controller: 'salons', action: 'search')) or location_is_know
+    - if (!current_page?(controller: 'salons', action: 'index') or !current_page?(controller: 'salons', action: 'search'))
       .dropdown.pull-right.search
         Prikaži prvo:
         %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
