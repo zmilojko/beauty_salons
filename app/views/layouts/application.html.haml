@@ -65,11 +65,12 @@
             %li= link_to "Usluge", services_path
     .navbar.navbar-purple
       .container
-        .row
-          .col-md-12
-            = form_tag(search_salons_path, :enforce_utf8 => false, :method => "get", id: "search-form") do
-              = text_field_tag :search, params[:search], placeholder: "Search Salons"
-            = submit_tag "Search"
+        .row.search-form
+          = form_tag(search_salons_path, :enforce_utf8 => false, :method => "get", id: "search-form", class: "row search-form") do
+            .col-md-9
+              = text_field_tag :search, params[:search], placeholder: "Pronađite salon po imenu, adresi, opštini ili telefonu"
+            .col-md-3
+              <button type="submit" class="search-button">PRONAĐI</button>
     .container
       .row
         %aside.col-md-3

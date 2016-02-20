@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
 $font-light: 300;
 $border-radius-base: 2px;
 $btn-default-bg:#7352B3; /**#7842dd;**/
@@ -22,6 +23,7 @@ $btn-default-color:#fff;
 $btn-default-border:$btn-default-bg;
 $font-family-sans-serif:  "Lato", Helvetica, Arial, sans-serif !default;
 $navbar-inverse-link-color:rgba(255,255,255,0.8);
+$navbar-inverse-link-color-soft:rgba(255,255,255,0.6);
 $navbar-inverse-link-hover-color:#fff;
 $navbar-margin-bottom:0;
 $header-footer-margin: 40px;
@@ -148,4 +150,48 @@ h3.lead.search{
 }
 .dropdown.pull-right.search{
   margin-top: 10px;
+}
+.navbar.navbar-purple{
+  height: 55px;
+}
+.row.search-form input,
+.row.search-form button{
+  margin-top: 6px;
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+}
+.row.search-form input{
+  font-size: 15px;
+  background: transparent;
+  border: 1px solid $navbar-inverse-link-color-soft;
+  padding: 0 10px;
+  color: white;
+  font-weight: 300;
+}
+.row.search-form input:focus,
+.row.search-form input:active{
+  outline: none;
+  border: 1px solid $btn-default-color;
+}
+.row.search-form .search-button{
+  background-color: rgb(67, 37, 125);
+  color: $btn-default-color;
+  border: 1px solid rgb(67, 37, 125);
+  line-height: 32px;
+}
+input::-webkit-input-placeholder {
+  color: $navbar-inverse-link-color-soft !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: $navbar-inverse-link-color-soft !important;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+  color: $navbar-inverse-link-color-soft !important;
+}
+
+input:-ms-input-placeholder {
+  color: $navbar-inverse-link-color-soft !important;
 }
