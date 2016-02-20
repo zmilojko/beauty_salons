@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: 'salons#index'
   resources :prices
 
+  get "/salon/:id/edit/prices" => "prices#advanced_edit", as: "edit_salon_price"
+
   get "/saloni" => "salons#index", as: "salons"
   get "/saloni/pretraga" => "salons#search", as: "search_salons"
   post "/saloni" => "salons#create"

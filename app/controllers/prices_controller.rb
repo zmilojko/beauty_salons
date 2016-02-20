@@ -18,6 +18,11 @@ class PricesController < ApplicationController
     @price = Price.new
   end
 
+  def advanced_edit
+    @salon = Salon.find_by_permalink(params[:id])
+    @prices = Price.where("salon_id = ?", @salon.id)
+  end
+
   # GET /prices/1/edit
   def edit
   end

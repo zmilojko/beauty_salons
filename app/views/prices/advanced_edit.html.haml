@@ -1,0 +1,12 @@
+- @prices.each do |price|
+  = price.service.name
+  %br
+  = price.price
+  %br
+  = link_to 'Edit', edit_price_path(price)
+  = link_to 'Destroy', price, method: :delete, data: { confirm: 'Are you sure?' }
+  %br
+  %br
+
+
+= link_to 'New Price', new_price_path
