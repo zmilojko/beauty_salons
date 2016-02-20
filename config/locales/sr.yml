@@ -1,0 +1,6 @@
+sr:
+  hello: "Zdravo svete"
+  will_paginate:
+    previous_label: "Prethodna"
+    next_label: "Sledeća"
+    page: "strana"
