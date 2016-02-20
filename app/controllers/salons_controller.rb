@@ -75,6 +75,9 @@ class SalonsController < ApplicationController
   # DELETE /salons/1
   # DELETE /salons/1.json
   def destroy
+    @salon.prices.each do |price|
+      price.destroy
+    end
     @salon.destroy
     respond_to do |format|
       format.html { redirect_to salons_url, notice: 'Salon was successfully destroyed.' }
