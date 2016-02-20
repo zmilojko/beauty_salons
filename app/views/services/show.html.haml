@@ -20,30 +20,6 @@
       %li= link_to 'prvo dalje', url_for( :sort => 'dalji' )
 .clearfix
 - @salons.each do |salon|
-  .panel.panel-default.salon
-    .panel-body
-      .row
-        .col-md-4
-          - if salon.image.exists?
-            = image_tag salon.image.url(:preview),:class => "salon_list_image"
-          - else
-            = image_tag("default.png", :class => "salon_list_image")
-        .col-md-8
-          %h3.title
-            = salon.name
-            - if location_is_know
-              %span.pull-right.label.label-success
-                = salon.distance_to(@target).round(2)
-                %span km
-            &nbsp;
-            %span.pull-right.label.label-default
-              = salon.prices.find_by(service_id: @service.id).price
-              %span RSD
-          %span.address= salon.address
-          %p= truncate(salon.description, :length => 200)
-          .pull-right
-            = link_to 'Pogledaj salon', salon,  class: "btn btn-default"
-            = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
-            = link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+  = render 'salons/salon_list', salon: salon
 = link_to 'Edit this service', edit_service_path(@service),  class: "btn btn-warning"
 = link_to 'New Service', new_service_path,  class: "btn btn-success"
