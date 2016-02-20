@@ -10,7 +10,8 @@
     %div.pull-left.search_count
       Pronađeno salona:
       = @number_of_results
-  = render 'salons/salon_filter'
+  -if location_is_know
+    = render 'salons/salon_filter'
 .clearfix
 - @salons.each do |salon|
   = render 'salons/salon_list', salon: salon
