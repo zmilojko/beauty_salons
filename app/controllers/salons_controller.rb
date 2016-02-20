@@ -14,8 +14,8 @@ class SalonsController < ApplicationController
     else
       @salons = Salon.all.order('created_at DESC')
     end
-
     @number_of_results = @salons.count
+    @salons = @salons.paginate(:page => params[:strana])
   end
 
   def index
@@ -25,6 +25,7 @@ class SalonsController < ApplicationController
       @salons = @salons.reverse
     end
     @number_of_results = @salons.count
+    @salons = @salons.paginate(:page => params[:strana])
   end
 
   # GET /salons/1

@@ -25,6 +25,7 @@ class ServicesController < ApplicationController
     end
 
     @number_of_results = @salons.count
+    @salons = @salons.paginate(:page => params[:strana])
 
 
 

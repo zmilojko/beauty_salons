@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'haml'
 gem 'paperclip'
+gem 'will_paginate', '~> 3.0.6'
 
 group :development, :test do
   gem 'pry-rails'
