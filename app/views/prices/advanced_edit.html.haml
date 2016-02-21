@@ -1,12 +1,57 @@
-- @prices.each do |price|
-  = price.service.name
-  %br
-  = price.price
-  %br
-  = link_to 'Edit', edit_price_path(price)
-  = link_to 'Destroy', price, method: :delete, data: { confirm: 'Are you sure?' }
-  %br
-  %br
+- @used_services = Array.new
+-if notice
+  .alert.alert-success
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    = notice.html_safe
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      Now editing services for salon:&nbsp;
+      %b
+        = link_to @salon.name, edit_salon_path
+  .panel-body
+    .row
+      .col-md-12
+        - if @prices
+          - @prices.each do |price|
+            = form_for price, :html => {:class => 'form-horizontal'} do |f|
+              - if price.errors.any?
+                #error_explanation
+                  %h2
+                    = pluralize(price.errors.count, "error")
+                    prohibited this price from being saved:
+                  %ul
+                    - price.errors.full_messages.each do |message|
+                      %li= message
+              .form-group
+                = f.label :price, :value => price.service.name, :class => 'col-md-2 control-label'
+                .col-md-7
+                  = f.number_field :price, :class => 'form-control'
+                .col-md-3
+                  = link_to 'Destroy', price, method: :delete,:class => 'control-label btn btn-danger', data: { confirm: 'Are you sure?' }
+                  = f.submit 'Update', :class => 'control-label btn btn-success'
+              .form-group.hidden
+                = f.text_field :salon_id, :value => price.salon.id
+                = f.text_field :service_id, :value => price.service.id
+                - @used_services.push(price.service.id)
 
+        - if @prices.count < 1
+          %span This salon has no services at this time.
 
-= link_to 'New Price', new_price_path
+        - @options_for_select = Service.where.not(id: @used_services).collect {|x| [x.name, x.id]}
+        -if @options_for_select.length > 0
+          %hr
+          = form_tag({:controller => 'prices'}, {:class => 'form-horizontal'}) do
+            .form-group
+              = label_tag 'price[service_id]', 'Service', class:'col-md-2 control-label'
+              .col-md-4
+                = select_tag('price[service_id]', options_for_select(@options_for_select), class: 'selectpicker', 'data-live-search': 'true', 'tabindex': "-99")
+              .col-md-3
+                = number_field_tag 'price[price]','', class: 'form-control'
+              .col-md-3
+                = submit_tag 'Add', class: 'control-label btn btn-success'
+            .form-group.hidden
+              = number_field_tag 'price[salon_id]', @salon.id
+        -else
+          .col-md-12
+            %p.text-right No more available services. All services are currently assigned to this salon.

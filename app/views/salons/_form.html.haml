@@ -13,6 +13,8 @@
       %b= @salon.name
     .panel-body
       .form-group
+        = link_to 'Edit prices', edit_salon_price_path, :class => 'btn btn-success pull-right'
+      .form-group
         = f.label :image
         %br
           = f.file_field :image

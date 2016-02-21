@@ -34,10 +34,10 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.save
-        format.html { redirect_to @price, notice: 'Price was successfully created.' }
+        format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully created.'}
         format.json { render :show, status: :created, location: @price }
       else
-        format.html { render :new }
+        format.html { render :back }
         format.json { render json: @price.errors, status: :unprocessable_entity }
       end
     end
@@ -48,10 +48,10 @@ class PricesController < ApplicationController
   def update
     respond_to do |format|
       if @price.update(price_params)
-        format.html { redirect_to @price, notice: 'Price was successfully updated.' }
+        format.html { redirect_to :back, notice: '<strong>' + @price.service.name + '</strong> was successfully updated.'}
         format.json { render :show, status: :ok, location: @price }
       else
-        format.html { render :edit }
+        format.html { render :back }
         format.json { render json: @price.errors, status: :unprocessable_entity }
       end
     end
@@ -62,7 +62,7 @@ class PricesController < ApplicationController
   def destroy
     @price.destroy
     respond_to do |format|
-      format.html { redirect_to prices_url, notice: 'Price was successfully destroyed.' }
+      format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully created.'}
       format.json { head :no_content }
     end
   end
