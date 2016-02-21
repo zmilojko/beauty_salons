@@ -1,4 +1,4 @@
-= form_for(@salon) do |f|
+= form_for @salon,:html => {:class => 'form-horizontal'} do |f|
   - if @salon.errors.any?
     #error_explanation
       %h2
@@ -9,58 +9,60 @@
           %li= message
   .panel.panel-default
     .panel-heading
-      Now editing:
-      %b= @salon.name
+      %h3.panel-title
+        Now editing:
+        %b= @salon.name
+        %span.pull-right
+          = link_to 'Edit prices', edit_salon_price_path, :class => 'pull-right'
     .panel-body
       .form-group
-        = link_to 'Edit prices', edit_salon_price_path, :class => 'btn btn-success pull-right'
+        = f.label :image, :class => 'col-md-2 control-label'
+        .col-md-10
+          %img{:src => @salon.image}
+          = f.file_field :image, :class => 'form-control'
       .form-group
-        = f.label :image
-        %br
-          = f.file_field :image
-      .form-group
-        = f.label :name
-        %br
+        = f.label :name, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :name, :class => "form-control", :required => true
       .form-group
-        = f.label :permalink
-        %br
+        = f.label :permalink, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :permalink, :class => "form-control", :required => true
       .form-group
-        = f.label :address
-        %br
+        = f.label :address, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :address, :class => "form-control", :required => true
       .form-group
-        = f.label :phone1
-        %br
+        = f.label :phone1, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :phone1, :class => "form-control", :required => true
       .form-group
-        = f.label :phone2
-        %br
+        = f.label :phone2, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :phone2, :class => "form-control", :required => true
       .form-group
-        = f.label :email
-        %br
+        = f.label :email, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :email, :class => "form-control", :required => true
       .form-group
-        = f.label :website
-        %br
+        = f.label :website, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :website, :class => "form-control", :required => true
       .form-group
-        = f.label :facebook
-        %br
+        = f.label :facebook, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :facebook, :class => "form-control", :required => true
       .form-group
-        = f.label :twitter
-        %br
+        = f.label :twitter, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :twitter, :class => "form-control", :required => true
       .form-group
-        = f.label :instagram
-        %br
+        = f.label :instagram, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_field :instagram, :class => "form-control", :required => true
       .form-group
-        = f.label :description
-        %br
+        = f.label :description, :class => 'col-md-2 control-label'
+        .col-md-10
           = f.text_area :description, :rows => 5, :class => "form-control", :required => true
       .form-group.hidden
         = f.label :lat
@@ -71,8 +73,8 @@
         %br
           = f.text_field :lng, :class => "form-control"
       .form-group
-        %label Location:
-        %br
+        %label.col-md-2.control-label Location:
+        .col-md-10
           #map_canvas.form-control
       - if f.object.lat.nil?
         - lat = 44.797638270
@@ -103,6 +105,7 @@
         });
         map.setCenter(myMarker.position);
         myMarker.setMap(map);
-
-      .actions
-        = f.submit 'Update', :class => 'btn btn-success'
+      .form-group
+        .col-md-12
+          .actions.text-right
+            = f.submit 'Update', :class => 'btn btn-success'
