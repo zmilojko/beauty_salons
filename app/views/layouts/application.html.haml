@@ -14,9 +14,14 @@
     :javascript
       function removeLocation(){
         document.getElementById("removeLocation").innerHTML = '<span class="glyphicon glyphicon-refresh spinning"></span>Brisanje lokacije';
+        url = window.location.toString();
+        newlocation = url.replace("?sort=blizi", "");
+        newlocation = newlocation.replace("&sort=blizi", "");
+        newlocation = newlocation.replace("?sort=dalji", "");
+        newlocation = newlocation.replace("&sort=dalji", "");
         document.cookie = 'lat=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         document.cookie = 'lng=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        setTimeout(location.reload(), 2000);
+        setTimeout(window.location = newlocation, 2500);
 
       }
       function getLocation() {
