@@ -73,7 +73,15 @@ class ServicesController < ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
+
+    # remove prices on service remove
+    prices = Price.where(:service_id => @service.id)
+    prices.each do |price|
+      price.destroy
+    end
+
     @service.destroy
+    
     respond_to do |format|
       format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
       format.json { head :no_content }
@@ -88,6 +96,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :slug)
+      params.require(:service).permit(:name, :slug, :counter)
     end
 end

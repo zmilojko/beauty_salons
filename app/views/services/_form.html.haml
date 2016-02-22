@@ -15,5 +15,6 @@
     = f.label :slug
     %br
       = f.text_field :slug
+      = f.number_field :counter, :value => 0, :class => 'hidden'
   .actions
     = f.submit

@@ -27,6 +27,14 @@ class PricesController < ApplicationController
   def edit
   end
 
+  # HELPER FUNCTION
+  def update_services(price)
+    current_service_id = price.service.id
+    prices = Price.where(:service_id => current_service_id).count
+    service_to_update = Service.find(current_service_id)
+    service_to_update.update(:counter => prices)
+  end
+
   # POST /prices
   # POST /prices.json
   def create
@@ -34,6 +42,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.save
+        update_services(@price)
         format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully created.'}
         format.json { render :show, status: :created, location: @price }
       else
@@ -48,7 +57,7 @@ class PricesController < ApplicationController
   def update
     respond_to do |format|
       if @price.update(price_params)
-        format.html { redirect_to :back, notice: '<strong>' + @price.service.name + '</strong> was successfully updated.'}
+        format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully updated.'}
         format.json { render :show, status: :ok, location: @price }
       else
         format.html { render :back }
@@ -61,8 +70,9 @@ class PricesController < ApplicationController
   # DELETE /prices/1.json
   def destroy
     @price.destroy
+    update_services(@price)
     respond_to do |format|
-      format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully created.'}
+      format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully destroyed.'}
       format.json { head :no_content }
     end
   end

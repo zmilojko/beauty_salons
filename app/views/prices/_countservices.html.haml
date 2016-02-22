@@ -1,8 +1,9 @@
 - @services = Service.all
 %ul.nav.nav-pills.nav-stacked
   - @services.each do |s|
-    - if s.prices.count != 0
+    - if s.counter.to_i != 0
       %li
         = link_to(s) do
           = s.name
-          (#{s.prices.count})
+          = surround '(', ')' do
+            = s.counter
