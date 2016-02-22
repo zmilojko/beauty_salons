@@ -60,7 +60,7 @@ class ServicesController < ApplicationController
   # PATCH/PUT /services/1.json
   def update
     respond_to do |format|
-      if @service.update(service_params)
+      if @service.update(service_params.except(:counter))
         format.html { redirect_to @service, notice: 'Service was successfully updated.' }
         format.json { render :show, status: :ok, location: @service }
       else
