@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222002314) do
+ActiveRecord::Schema.define(version: 20160223152856) do
 
   create_table "prices", force: :cascade do |t|
     t.integer  "price"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20160222002314) do
     t.string   "facebook"
     t.string   "twitter"
     t.string   "instagram"
+    t.string   "city_name"
+    t.string   "municipality_name"
   end
 
   add_index "salons", ["permalink"], name: "index_salons_on_permalink", unique: true

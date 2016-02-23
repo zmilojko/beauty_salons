@@ -6,7 +6,7 @@ class Salon < ActiveRecord::Base
   end
 
   def self.search(search)
-    where("name LIKE ? or address LIKE ?", "%#{search}%","%#{search}%")
+    where("name LIKE ? or address LIKE ? or city_name LIKE ? or municipality_name LIKE ?", "%#{search}%","%#{search}%","%#{search}%","%#{search}%")
   end
 
   def distance_to(target)

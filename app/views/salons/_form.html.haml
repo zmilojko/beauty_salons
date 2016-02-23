@@ -33,6 +33,14 @@
         .col-md-10
           = f.text_field :address, :class => "form-control", :required => true
       .form-group
+        = f.label :city_name, :class => 'col-md-2 control-label'
+        .col-md-10
+          = f.text_field :city_name, :class => "form-control", :required => true
+      .form-group
+        = f.label :municipality_name, :class => 'col-md-2 control-label'
+        .col-md-10
+          = f.text_field :municipality_name, :class => "form-control", :required => true
+      .form-group
         = f.label :phone1, :class => 'col-md-2 control-label'
         .col-md-10
           = f.text_field :phone1, :class => "form-control", :required => true

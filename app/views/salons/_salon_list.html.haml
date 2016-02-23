@@ -18,6 +18,10 @@
             %span.pull-right.label.label-default
               = salon.prices.find_by(service_id: @service.id).price
               %span RSD
+        %span.address= salon.city_name
+        ,
+        %span.address= salon.municipality_name
+        ,
         %span.address= salon.address
         %p= truncate(salon.description, :length => 200)
         .pull-right
