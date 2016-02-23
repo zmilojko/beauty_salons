@@ -195,3 +195,10 @@ input::-moz-placeholder {  /* Firefox 19+ */
 input:-ms-input-placeholder {
   color: $navbar-inverse-link-color-soft !important;
 }
+h1.salon_title{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.salon_info{
+  display: block;
+}

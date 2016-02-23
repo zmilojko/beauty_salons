@@ -1,36 +1,45 @@
 / <p id="notice"><haml:loud> notice </haml:loud></p>
 .panel.panel-default
-  .panel-heading
-    = @salon.name
-    = link_to 'Edit', edit_salon_path(@salon),class: "btn btn-info pull-right"
   .panel-body
     .row
       .col-md-4
         = image_tag @salon.image.url(:preview)
-        %hr
-          %address
-            %strong Adresa:
-            = @salon.address
-            %br
-              \&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beograd, Zemun
-              %br
-                %br
-                  %strong Telefon:
-                  %a{:href => "tel:+381606624730"} 060/6624-730
-                  %br
-                    %br
-                      %strong Email:
-                      %a{:href => "mailto:#"}
-                        info@#{@salon.permalink}.com
-                      %br
-                        %br
-                          %strong Web:
-                          %a{:href => "salon.com"}
-                            = @salon.permalink
-                            \.com
-          #map_canvas{:style => "height:200px;min-height:10px;"}
+        %span.salon_info= @salon.address
+        %a{ :href => "tel:"+@salon.phone1, :title => @salon.phone1, :class => 'salon_info' }
+          = @salon.phone1
+        %a{ :href => "tel:"+@salon.phone2, :title => @salon.phone2, :class => 'salon_info' }
+          = @salon.phone2
+        =mail_to @salon.email, @salon.email, :class => 'salon_info'
+        %a{ :href => @salon.website, :title => @salon.website,:target => "_blank", :class => 'salon_info' }
+          = @salon.website
+        %a{ :href => @salon.facebook, :title => @salon.facebook,:target => "_blank", :class => 'salon_info' }
+          = @salon.facebook
+        %a{ :href => @salon.instagram, :title => @salon.instagram,:target => "_blank", :class => 'salon_info' }
+          = @salon.instagram
+        %a{ :href => @salon.twitter, :title => @salon.twitter,:target => "_blank",:class => 'salon_info' }
+          = @salon.twitter
       .col-md-8
-        = @salon.description
+        %h1.salon_title
+          = @salon.name
+        = link_to 'Edit', edit_salon_path(@salon),class: "btn btn-info pull-right"
+        %p= @salon.description
+%h2
+  Galerija
+.panel.panel-default
+  .panel-body
+    .row
+      = image_tag @salon.image.url(:preview), :class => 'col-md-3'
+      = image_tag @salon.image.url(:preview), :class => 'col-md-3'
+      = image_tag @salon.image.url(:preview), :class => 'col-md-3'
+      = image_tag @salon.image.url(:preview), :class => 'col-md-3'
+
+%h2
+  Kako do nas
+.panel.panel-default
+  .panel-body
+    .row
+      .col-md-12
+        #map_canvas{:style => "height:400px;min-height:10px;"}
 :javascript
   var map = new google.maps.Map(document.getElementById('map_canvas'), {
       zoom: 15,
@@ -52,6 +61,3 @@
   });
   map.setCenter(myMarker.position);
   myMarker.setMap(map);
-= link_to 'Edit', edit_salon_path(@salon)
-|
-\#{link_to 'Back', salons_path}

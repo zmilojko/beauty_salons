@@ -79,6 +79,8 @@
               <button type="submit" class="search-button">PRONAĐI</button>
     .container
       .row
+        .col-md-9
+          = yield
         %aside.col-md-3
           %h3.lead Usluge
           .panel.panel-default.panel-services
@@ -100,8 +102,6 @@
                   %label
                     %input{:type => "checkbox"} Remember me
                 %button.btn.btn-default{:type => "submit"} Submit
-        .col-md-9
-          = yield
     %footer.navbar-inverse
       .container
         .row
