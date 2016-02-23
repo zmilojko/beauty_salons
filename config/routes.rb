@@ -5,10 +5,7 @@ Rails.application.routes.draw do
   root to: 'salons#index'
 
   authenticate :user do
-    resources :prices
-  end
-
-  authenticate :user do
+    # protect salon route
     get "/salon/:id/edit/prices" => "prices#advanced_edit", as: "edit_salon_price"
     post "/saloni" => "salons#create"
     get "/salon/new" => "salons#new", as: "new_salon"
@@ -16,13 +13,11 @@ Rails.application.routes.draw do
     put "/salon/:id" => "salons#update"
     delete "/salon/:id" => "salons#destroy"
     get "/salon/:id/edit" => "salons#edit", as: "edit_salon"
-  end
 
-  get "/saloni" => "salons#index", as: "salons"
-  get "/saloni/pretraga" => "salons#search", as: "search_salons"
-  get "/salon/:id" => "salons#show", as: "salon"
+    # protect price routes
+    resources :prices
 
-  authenticate :user do
+    # protect service routes
     post "/usluge" => "services#create"
     get "/usluge" => "services#index", as: "services"
     get "/usluga/new" => "services#new", as: "new_service"
@@ -32,6 +27,12 @@ Rails.application.routes.draw do
     delete "/usluga/:id" => "services#destroy"
   end
 
+  # allow salon routes
+  get "/saloni" => "salons#index", as: "salons"
+  get "/saloni/pretraga" => "salons#search", as: "search_salons"
+  get "/salon/:id" => "salons#show", as: "salon"
+
+  # allow service routes
   get "/usluga/:id" => "services#show", as: "service"
 
 end
