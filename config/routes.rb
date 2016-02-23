@@ -1,26 +1,37 @@
 Rails.application.routes.draw do
-  root to: 'salons#index'
-  resources :prices
 
-  get "/salon/:id/edit/prices" => "prices#advanced_edit", as: "edit_salon_price"
+  devise_for :users
+
+  root to: 'salons#index'
+
+  authenticate :user do
+    resources :prices
+  end
+
+  authenticate :user do
+    get "/salon/:id/edit/prices" => "prices#advanced_edit", as: "edit_salon_price"
+    post "/saloni" => "salons#create"
+    get "/salon/new" => "salons#new", as: "new_salon"
+    patch "/salon/:id" => "salons#update"
+    put "/salon/:id" => "salons#update"
+    delete "/salon/:id" => "salons#destroy"
+    get "/salon/:id/edit" => "salons#edit", as: "edit_salon"
+  end
 
   get "/saloni" => "salons#index", as: "salons"
   get "/saloni/pretraga" => "salons#search", as: "search_salons"
-  post "/saloni" => "salons#create"
-  get "/salon/new" => "salons#new", as: "new_salon"
-  get "/salon/:id/edit" => "salons#edit", as: "edit_salon"
   get "/salon/:id" => "salons#show", as: "salon"
-  patch "/salon/:id" => "salons#update"
-  put "/salon/:id" => "salons#update"
-  delete "/salon/:id" => "salons#destroy"
 
-  get "/usluge" => "services#index", as: "services"
-  post "/usluge" => "services#create"
-  get "/usluga/new" => "services#new", as: "new_service"
-  get "/usluga/:id/edit" => "services#edit", as: "edit_service"
+  authenticate :user do
+    post "/usluge" => "services#create"
+    get "/usluge" => "services#index", as: "services"
+    get "/usluga/new" => "services#new", as: "new_service"
+    get "/usluga/:id/edit" => "services#edit", as: "edit_service"
+    patch "/usluga/:id" => "services#update"
+    put "/usluga/:id" => "services#update"
+    delete "/usluga/:id" => "services#destroy"
+  end
+
   get "/usluga/:id" => "services#show", as: "service"
-  patch "/usluga/:id" => "services#update"
-  put "/usluga/:id" => "services#update"
-  delete "/usluga/:id" => "services#destroy"
 
 end

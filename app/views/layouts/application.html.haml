@@ -69,6 +69,10 @@
             %li= link_to "Saloni", salons_path
             %li= link_to "Cene", prices_path
             %li= link_to "Usluge", services_path
+            - if user_signed_in?
+              %li= link_to "Sign out", destroy_user_session_path, :method => :delete
+            - else
+              %li= link_to "Sign in", new_user_session_path
     .navbar.navbar-purple
       .container
         .row.search-form
@@ -80,6 +84,14 @@
     .container
       .row
         .col-md-9
+          - if notice
+            .alert.alert-success
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              = notice
+          - if alert
+            .alert.alert-success
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              = alert
           = yield
         %aside.col-md-3
           %h3.lead Usluge

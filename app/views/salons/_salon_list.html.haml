@@ -26,5 +26,6 @@
         %p= truncate(salon.description, :length => 200)
         .pull-right
           = link_to 'Pogledaj salon', salon,  class: "btn btn-default"
-          = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
-          = link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+          - if user_signed_in?
+            = link_to 'Edit', edit_salon_path(salon), class: "btn btn-primary"
+            = link_to 'Destroy', salon, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"

@@ -5,3 +5,11 @@ sr:
     previous_label: "Prethodna"
     next_label: "Sledeća"
     page: "strana"
+  devise:
+    failure:
+      user:
+        unauthenticated: 'Please login.'
+    sessions:
+      user:
+        signed_in: 'Logged in successfully.'
+        signed_out: 'Logged out successfully.'
