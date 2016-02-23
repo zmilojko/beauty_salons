@@ -13,7 +13,8 @@
         Now editing:
         %b= @salon.name
         %span.pull-right
-          = link_to 'Edit prices', edit_salon_price_path, :class => 'pull-right'
+          - if @salon.permalink
+            = link_to 'Edit prices', edit_salon_price_path(:id => @salon.permalink), :class => 'pull-right'
     .panel-body
       .form-group
         = f.label :image, :class => 'col-md-2 control-label'
