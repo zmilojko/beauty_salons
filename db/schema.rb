@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223152856) do
+ActiveRecord::Schema.define(version: 20160223153737) do
 
   create_table "prices", force: :cascade do |t|
     t.integer  "price"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20160223152856) do
     t.string   "instagram"
     t.string   "city_name"
     t.string   "municipality_name"
+    t.string   "monday"
+    t.string   "thusday"
+    t.string   "wednesdey"
+    t.string   "thursday"
+    t.string   "friday"
+    t.string   "saturday"
+    t.string   "sunday"
   end
 
   add_index "salons", ["permalink"], name: "index_salons_on_permalink", unique: true
