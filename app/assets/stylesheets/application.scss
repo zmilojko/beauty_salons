@@ -202,3 +202,20 @@ h1.salon_title{
 .salon_info{
   display: block;
 }
+.nav-pills > li > a > .badge,
+aside li.current{
+  background-color: $btn-default-bg;
+}
+aside .nav.nav-pills.nav-stacked > li.current a,
+aside .nav.nav-pills.nav-stacked > li.current a:hover,
+aside .nav.nav-pills.nav-stacked > li.current > a > .badge,
+aside .nav.nav-pills.nav-stacked > li.current > a:hover > .badge{
+  cursor: default;
+  color: $btn-default-color;
+  background-color: $btn-default-bg;
+}
+aside .nav.nav-pills.nav-stacked > li.current > a > .badge,
+aside .nav.nav-pills.nav-stacked > li.current > a:hover > .badge{
+  background-color: $btn-default-color;
+  color: $btn-default-bg;
+}

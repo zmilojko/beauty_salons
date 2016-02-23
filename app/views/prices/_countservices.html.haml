@@ -2,8 +2,13 @@
 %ul.nav.nav-pills.nav-stacked
   - @services.each do |s|
     - if s.counter.to_i != 0
-      %li
-        = link_to(s) do
-          = s.name
-          = surround '(', ')' do
-            = s.counter
+      - if request.env['PATH_INFO']==service_path(s)
+        %li.current
+          = link_to(s) do
+            = s.name
+            %span.badge.primary= s.counter
+      - else
+        %li
+          = link_to(s) do
+            = s.name
+            %span.badge.primary= s.counter
