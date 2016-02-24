@@ -1,5 +1,21 @@
 class PricesController < ApplicationController
   before_action :set_price, only: [:show, :edit, :update, :destroy]
+  before_filter :require_permission, only: [:edit, :update, :destroy, :advanced_edit]
+
+
+  def require_permission
+    @salon = Salon.find_by_permalink(params[:id])
+    if @salon
+      id = @salon.id
+    else
+      id = @price.salon.id
+    end
+    if current_user.control.to_i == id or current_user.control.to_i == 0
+      return true
+    else
+      redirect_to root_path
+    end
+  end
 
   # GET /prices
   # GET /prices.json

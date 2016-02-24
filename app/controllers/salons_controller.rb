@@ -1,5 +1,15 @@
 class SalonsController < ApplicationController
   before_action :set_salon, only: [:show, :edit, :update, :destroy]
+  before_filter :require_permission, only: [:edit, :update, :destroy]
+
+  def require_permission
+    id = @salon.id
+    if current_user.control.to_i == id or current_user.control.to_i == 0
+      return true
+    else
+      redirect_to root_path
+    end
+  end
 
   def search
     @target = { :lng => cookies[:lng].to_f, :lat => cookies[:lat].to_f}

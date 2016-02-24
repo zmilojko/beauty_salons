@@ -2,6 +2,8 @@
   Edit #{resource_name.to_s.humanize}
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = devise_error_messages!
+  - if current_user.control == 0
+    = f.number_field :control, autofocus: false
   .field
     = f.label :email
     %br/
