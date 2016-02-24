@@ -276,3 +276,18 @@ aside .nav.nav-pills.nav-stacked > li.current > a:hover > .badge{
   text-align: center;
   font-size: 30px;
 }
+.admin-menu-bar{
+  background-color: #2AB6FB;
+  color: white;
+  padding: 8px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  top:0;
+}
+.admin-menu-bar a{
+  color:white;
+}
+body.admin{
+  padding-top: 34px;
+}

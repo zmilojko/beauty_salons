@@ -1,0 +1,14 @@
+.panel.panel-default
+  .panel-body
+    .row
+      .col-md-12
+        -@users.each do |user|
+          = user.email
+          |
+          = user.created_at
+          |
+          - if user.control.to_i != 0
+            = Salon.find(user.control).name
+          |
+          
+          %hr

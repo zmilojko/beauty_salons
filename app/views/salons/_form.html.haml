@@ -21,14 +21,16 @@
         .col-md-10
           %img{:src => @salon.image}
           = f.file_field :image, :class => 'form-control'
-      .form-group
-        = f.label :name, :class => 'col-md-2 control-label'
-        .col-md-10
-          = f.text_field :name, :class => "form-control", :required => true
-      .form-group
-        = f.label :permalink, :class => 'col-md-2 control-label'
-        .col-md-10
-          = f.text_field :permalink, :class => "form-control", :required => true
+      - if user_signed_in?
+        - if current_user.control.to_i == 0
+          .form-group
+            = f.label :name, :class => 'col-md-2 control-label'
+            .col-md-10
+              = f.text_field :name, :class => "form-control", :required => true
+          .form-group
+            = f.label :permalink, :class => 'col-md-2 control-label'
+            .col-md-10
+              = f.text_field :permalink, :class => "form-control", :required => true
       .form-group
         = f.label :address, :class => 'col-md-2 control-label'
         .col-md-10

@@ -79,7 +79,15 @@ class SalonsController < ApplicationController
   # PATCH/PUT /salons/1.json
   def update
     respond_to do |format|
-      if @salon.update(salon_params)
+      id = @salon.id
+      if current_user.control.to_i == id
+        params = salon_params.except(:name, :permalink)
+      end
+      if current_user.control.to_i == 0
+        params = salon_params
+      end
+
+      if @salon.update(params)
         format.html { redirect_to @salon, notice: 'Salon was successfully updated.' }
         format.json { render :show, status: :ok, location: @salon }
       else
