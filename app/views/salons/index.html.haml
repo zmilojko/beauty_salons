@@ -11,6 +11,5 @@
 - @salons.each do |salon|
   = render 'salons/salon_list', salon: salon
 = will_paginate @salons, :param_name => t('will_paginate.page'), renderer: BootstrapPagination::Rails
-- if user_signed_in?
-  - if current_user.control.to_i == 0
-    = link_to 'New Salon', new_salon_path, class: "btn btn-success pull-right"
+-if is_admin(current_user)
+  = link_to 'New Salon', new_salon_path, class: "btn btn-success pull-right"
