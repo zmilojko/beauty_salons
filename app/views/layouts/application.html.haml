@@ -87,11 +87,11 @@
           - if notice
             .alert.alert-success
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              = notice
+              = notice.html_safe
           - if alert
-            .alert.alert-success
+            .alert.alert-danger
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              = alert
+              = alert.html_safe
           = yield
         %aside.col-md-3
           %h3.lead Usluge
