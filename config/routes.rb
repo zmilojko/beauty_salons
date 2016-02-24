@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  get "/users" => "users#list", as: "list_users"
+
 
 
   root to: 'salons#index'
 
   authenticate :user do
     # protect salon route
-
+    get "/users" => "users#list", as: "list_users"
     get "/salon/:id/edit/prices" => "prices#advanced_edit", as: "edit_salon_price"
     post "/saloni" => "salons#create"
     get "/salon/new" => "salons#new", as: "new_salon"
