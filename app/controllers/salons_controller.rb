@@ -1,11 +1,15 @@
 class SalonsController < ApplicationController
   before_action :set_salon, only: [:show, :edit, :update, :destroy]
-  before_filter :require_permission, only: [:edit, :update, :destroy]
+  before_filter :require_permission, only: [:new, :create, :edit, :update, :destroy]
 
   def require_permission
-    id = @salon.id
-    if current_user.control.to_i == id or current_user.control.to_i == 0
-      return true
+    if @salon
+      id = @salon.id
+      if current_user.control.to_i == id or current_user.control.to_i == 0
+        return true
+      else
+        redirect_to root_path
+      end
     else
       redirect_to root_path
     end
