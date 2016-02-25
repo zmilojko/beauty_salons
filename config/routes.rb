@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: 'salons#index'
 
   authenticate :user do
+    get "/users" => "users#list", as: "list_users"
     get "/user/create_new" => "users#new_custom", as: "new_user"
     post "/user/create" => "users#create_custom", as: "users"
     delete "/user/delete/:id" => "users#delete_custom", as: "delete_user"
@@ -30,7 +31,6 @@ Rails.application.routes.draw do
     put "/usluga/:id" => "services#update"
     delete "/usluga/:id" => "services#destroy"
 
-    get "/users" => "users#list", as: "list_users"
   end
 
   devise_for :users, :controllers => {:registrations => "registrations"}

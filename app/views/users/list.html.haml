@@ -1,14 +1,34 @@
+%h3.lead
+  Korisnici
 .panel.panel-default
   .panel-body
     .row
       .col-md-12
-        -@users.each do |user|
-          = user.email
+        - len = @users.length
+        -@users.each_with_index do |user,index|
+          %h4
+            = user.email
+            %b.small
+              - if user.control.to_i != 0
+                - salon = Salon.find(user.control)
+                - message = 'Remove admin user for '+salon.name+'?'
+                = link_to salon.name, salon
+              - else
+                - message = 'Remove super admin?'
+                SUPER ADMIN
+          Login count:
+          = user.sign_in_count
+          %br
+          Created at:
+          = user.created_at.strftime('%d.%m.%Y %H:%M')
           |
-          = user.created_at
+          Updated at:
+          = user.updated_at.strftime('%d.%m.%Y %H:%M')
           |
-          - if user.control.to_i != 0
-            = Salon.find(user.control).name
-          |
-          = link_to 'Destroy', delete_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }
-          %hr
+          Last login:
+          = user.last_sign_in_at.strftime('%d.%m.%Y %H:%M')
+          = link_to 'REMOVE USER', delete_user_path(user.id), method: :delete, data: { confirm: message },
+            :class =>'btn btn-danger btn-sm pull-right',
+            :style => 'margin-top:-32px;'
+          -if index+1 != len
+            %hr
