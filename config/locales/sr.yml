@@ -1,4 +1,5 @@
 sr:
+  no_signup_available: "Signup nije dozvoljen."
   no_right_to_do_that: "Nemate administratorska prava."
   hello: "Zdravo svete"
   sort_by: "Prikaži prvo:"

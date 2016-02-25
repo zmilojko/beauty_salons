@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     get "/users" => "users#list", as: "list_users"
   end
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   # allow salon routes
   get "/saloni" => "salons#index", as: "salons"
