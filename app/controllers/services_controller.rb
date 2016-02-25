@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-    before_filter :super_admin_permissions, only: [:update, :edit, :show, :index, :new, :create,:destroy]
+    before_filter :super_admin_permissions, only: [:update, :edit, :index, :new, :create,:destroy]
 
   # GET /services
   # GET /services.json

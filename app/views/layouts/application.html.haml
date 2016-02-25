@@ -87,6 +87,10 @@
                   |
                   = link_to 'Svi korisnici', list_users_path
                   |
+                  = link_to "Cene", prices_path
+                  |
+                  = link_to "Usluge", services_path
+                  |
                 = link_to 'Promena podataka', edit_user_registration_path
                 |
                 = link_to "Odjava", destroy_user_session_path, :method => :delete
@@ -113,8 +117,6 @@
                   %span.glyphicon.glyphicon-map-marker
                   ZABORAVI LOKACIJU
             %li= link_to "Saloni", salons_path
-            %li= link_to "Cene", prices_path
-            %li= link_to "Usluge", services_path
             - if !user_signed_in?
               %li= link_to "Sign in", new_user_session_path
     .navbar.navbar-purple
