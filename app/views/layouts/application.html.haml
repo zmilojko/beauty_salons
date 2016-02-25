@@ -170,8 +170,21 @@
                 %input#email.form-control{:placeholder => "Unesite ovde Vašu email adrese", :type => "email"}
               %button.btn.btn-default{:type => "submit"} PRIJAVA
           .col-md-3
-            %h3 Izdvajamo iz ponude
-            %p INSERT SALONS HERE LATER
+            %h3 Najnoviji saloni
+            %ul.latest_salons
+              - latest_salons.each do |latest_salon|
+                %a{ :href => salon_path(latest_salon), :title => latest_salon.name}
+                  %li
+                    %span.info.name
+                      = latest_salon.name
+                    %span.info.address
+                      = latest_salon.address
+                      ,
+                    %span.info.municipality
+                      = latest_salon.municipality_name
+                      ,
+                    %span.info.city
+                      = latest_salon.city_name
           .col-md-3
             %h3 Kontakt
             %table.table.contact
