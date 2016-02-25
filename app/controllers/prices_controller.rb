@@ -17,6 +17,7 @@ class PricesController < ApplicationController
     if current_user.control.to_i == id or current_user.control.to_i == 0
       return true
     else
+      flash[:alert] = t("no_right_to_do_that")
       redirect_to root_path
     end
   end

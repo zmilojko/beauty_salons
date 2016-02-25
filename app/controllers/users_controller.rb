@@ -1,13 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :super_admin_permissions, only: [:new_custom, :create_custom]
+  before_filter :super_admin_permissions, only: [:list, :new_custom, :create_custom]
 
   def list
-    if current_user.control.to_i == 0
-      @users = User.all
-    else
-      flash[:alert] = t("no_right_to_do_that")
-      redirect_to root_path
-    end
+    @users = User.all
   end
 
   def new_custom
