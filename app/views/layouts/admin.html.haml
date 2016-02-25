@@ -10,4 +10,19 @@
     %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"}
     = csrf_meta_tags
   %body
-    = yield
+    .container
+      .row
+        .col-sm-6.col-md-4.col-md-offset-4
+          .account-wall
+            - if notice
+              .alert.alert-success.col-sm-10.col-md-10.col-md-offset-1
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                = notice.html_safe
+            - if alert
+              .alert.alert-danger.col-sm-10.col-md-10.col-md-offset-1
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                = alert.html_safe
+            = yield
+            .text-center
+              %br
+              = link_to "Back", :back
