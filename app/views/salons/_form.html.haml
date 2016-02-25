@@ -103,26 +103,26 @@
         = f.label :description, :class => 'col-md-2 control-label'
         .col-md-10
           = f.text_area :description, :rows => 5, :class => "form-control", :required => true
+        - if f.object.lat.nil?
+          - lat = 44.797638270
+        - else
+          - lat = f.object.lat
+        - if f.object.lng.nil?
+          - lng = 20.445800781
+        - else
+          - lng = f.object.lng
       .form-group.hidden
-        = f.label :lat
-        %br
-          = f.text_field :lat, :class => "form-control"
+        = f.label :lat, :class => 'col-md-2 control-label'
+        .col-md-10
+          = f.text_field :lat, :class => "form-control", :value => lat
       .form-group.hidden
-        = f.label :lng
-        %br
-          = f.text_field :lng, :class => "form-control"
+        = f.label :lng, :class => 'col-md-2 control-label'
+        .col-md-10
+          = f.text_field :lng, :class => "form-control", :value => lng
       .form-group
         %label.col-md-2.control-label Location:
         .col-md-10
           #map_canvas.form-control
-      - if f.object.lat.nil?
-        - lat = 44.797638270
-      - else
-        - lat = f.object.lat
-      - if f.object.lng.nil?
-        - lng = 20.445800781
-      - else
-        - lng = f.object.lng
       :javascript
         var map = new google.maps.Map(document.getElementById('map_canvas'), {
             zoom: 15,
