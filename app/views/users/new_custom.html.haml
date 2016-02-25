@@ -1,25 +1,34 @@
-.logo.login
-  MOJA<span>LEPOTA</span>
-.text-center
-  Sign Up
-= form_for(@user) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, :class => 'form-control'
-    %br/
-    = f.select :control, Salon.all.collect {|x| [x.name, x.id]}, {}, :class => 'selectpicker form-control', 'data-live-search' => 'true', 'tabindex' => '-98'
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off", :class => 'form-control'
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control'
-    %br/
-  .actions
-    = f.submit "Sign up", :class => 'btn btn-success btn-lg btn-block'
+%h3.lead
+  Dodavanje korisnika
+.panel.panel-default
+  .panel-body
+    .row
+      .col-sm-10.col-md-10.col-md-offset-1
+        = form_for(@user) do |f|
+          .field
+            = f.label :email
+            %br/
+            = f.email_field :email, autofocus: true, :class => 'form-control'
+            %br/
+            = f.label :control
+            %br/
+
+            %select{ :name => "user[control]", :class => "selectpicker" }
+              - Salon.all.each do |s|
+                %option{:value => s.id}= s.name
+              %option{:value => '0'}= 'SUPER ADMIN'
+
+          .field
+            = f.label :password
+            - if @minimum_password_length
+              %em
+                (#{@minimum_password_length} characters minimum)
+            %br/
+            = f.password_field :password, autocomplete: "off", :class => 'form-control'
+          .field
+            = f.label :password_confirmation
+            %br/
+            = f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control'
+            %br/
+          .actions
+            = f.submit "Sign up", :class => 'btn btn-success btn-lg btn-block'

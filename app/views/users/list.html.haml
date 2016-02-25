@@ -19,14 +19,19 @@
           Login count:
           = user.sign_in_count
           %br
-          Created at:
-          = user.created_at.strftime('%d.%m.%Y %H:%M')
-          |
-          Updated at:
-          = user.updated_at.strftime('%d.%m.%Y %H:%M')
-          |
-          Last login:
-          = user.last_sign_in_at.strftime('%d.%m.%Y %H:%M')
+          - if user.created_at
+            Created at:
+            = user.created_at.strftime('%d.%m.%Y %H:%M')
+            |
+          - if user.updated_at
+            Updated at:
+            = user.updated_at.strftime('%d.%m.%Y %H:%M')
+            |
+            Last login:
+            - if user.last_sign_in_at
+              = user.last_sign_in_at.strftime('%d.%m.%Y %H:%M')
+            -else
+              Never
           = link_to 'REMOVE USER', delete_user_path(user.id), method: :delete, data: { confirm: message },
             :class =>'btn btn-danger btn-sm pull-right',
             :style => 'margin-top:-32px;'
