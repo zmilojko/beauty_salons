@@ -3,6 +3,9 @@ class SalonsController < ApplicationController
   before_filter :require_permission, only: [:new, :create, :edit, :update, :destroy]
 
   def require_permission
+    if current_user.control.to_i == 0
+      return true
+    end
     if @salon
       id = @salon.id
       if current_user.control.to_i == id or current_user.control.to_i == 0
@@ -66,16 +69,19 @@ class SalonsController < ApplicationController
   # POST /salons
   # POST /salons.json
   def create
-    @salon = Salon.new(salon_params)
-
-    respond_to do |format|
-      if @salon.save
-        format.html { redirect_to @salon, notice: 'Salon was successfully created.' }
-        format.json { render :show, status: :created, location: @salon }
-      else
-        format.html { render :new }
-        format.json { render json: @salon.errors, status: :unprocessable_entity }
+    if current_user.control.to_i == 0
+      @salon = Salon.new(salon_params)
+      respond_to do |format|
+        if @salon.save
+          format.html { redirect_to @salon, notice: 'Salon was successfully created.' }
+          format.json { render :show, status: :created, location: @salon }
+        else
+          format.html { render :new }
+          format.json { render json: @salon.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to(:back)
     end
   end
 
@@ -104,13 +110,17 @@ class SalonsController < ApplicationController
   # DELETE /salons/1
   # DELETE /salons/1.json
   def destroy
-    @salon.prices.each do |price|
-      price.destroy
-    end
-    @salon.destroy
-    respond_to do |format|
-      format.html { redirect_to salons_url, notice: 'Salon was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.control.to_i == 0
+      @salon.prices.each do |price|
+        price.destroy
+      end
+      @salon.destroy
+      respond_to do |format|
+        format.html { redirect_to salons_url, notice: 'Salon was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to(:back)
     end
   end
 

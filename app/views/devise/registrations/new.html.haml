@@ -1,22 +1,26 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+.logo.login
+  MOJA<span>LEPOTA</span>
+.text-center
+  Sign Up
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form form-signin'}) do |f|
   = devise_error_messages!
   .field
     = f.label :email
     %br/
-    = f.email_field :email, autofocus: true
-    = f.select :control, Salon.all.collect {|x| [x.name, x.id]}, {}
+    = f.email_field :email, autofocus: true, :class => 'form-control'
+    %br/
+    = f.select :control, Salon.all.collect {|x| [x.name, x.id]}, {}, :class => 'selectpicker form-control', 'data-live-search' => 'true', 'tabindex' => '-98'
   .field
     = f.label :password
     - if @minimum_password_length
       %em
         (#{@minimum_password_length} characters minimum)
     %br/
-    = f.password_field :password, autocomplete: "off"
+    = f.password_field :password, autocomplete: "off", :class => 'form-control'
   .field
     = f.label :password_confirmation
     %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
+    = f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control'
+    %br/
   .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+    = f.submit "Sign up", :class => 'btn btn-success btn-lg btn-block'

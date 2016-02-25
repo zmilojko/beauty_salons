@@ -10,5 +10,6 @@
 - @salons.each do |salon|
   = render 'salons/salon_list', salon: salon
 = will_paginate @salons, :param_name => t('will_paginate.page'), renderer: BootstrapPagination::Rails
-= link_to 'Edit this service', edit_service_path(@service),  class: "btn btn-warning"
-= link_to 'New Service', new_service_path,  class: "btn btn-success"
+-if is_admin(current_user)
+  = link_to 'Edit this service', edit_service_path(@service),  class: "btn btn-warning"
+  = link_to 'New Service', new_service_path,  class: "btn btn-success"
