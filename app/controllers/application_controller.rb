@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_up_path_for(resource)
+     '/' # Or :prefix_to_your_route
+   end
+
    def configure_permitted_parameters
        devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :control) }
        devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :current_password) }

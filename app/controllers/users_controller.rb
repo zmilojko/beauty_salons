@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def list
-    @users = User.all
+    if current_user.control.to_i == 0
+      @users = User.all
+    else
+      redirect_to '/'
+    end
   end
 
   def update
