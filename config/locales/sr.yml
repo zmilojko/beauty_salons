@@ -1,4 +1,5 @@
 sr:
+  no_right_to_do_that: "Nemate administratorska prava."
   hello: "Zdravo svete"
   sort_by: "Prikaži prvo:"
   will_paginate:

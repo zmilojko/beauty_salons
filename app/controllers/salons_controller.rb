@@ -1,6 +1,8 @@
 class SalonsController < ApplicationController
   before_action :set_salon, only: [:show, :edit, :update, :destroy]
-  before_filter :require_permission, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :super_admin_permissions, only: [:new, :create,:destroy]
+  before_filter :require_permission, only: [:edit, :update]
+
 
   def require_permission
     if current_user.control.to_i == 0
@@ -11,9 +13,11 @@ class SalonsController < ApplicationController
       if current_user.control.to_i == id or current_user.control.to_i == 0
         return true
       else
+        flash[:alert] = t("no_right_to_do_that")
         redirect_to root_path
       end
     else
+      flash[:alert] = t("no_right_to_do_that")
       redirect_to root_path
     end
   end
@@ -69,19 +73,15 @@ class SalonsController < ApplicationController
   # POST /salons
   # POST /salons.json
   def create
-    if current_user.control.to_i == 0
-      @salon = Salon.new(salon_params)
-      respond_to do |format|
-        if @salon.save
-          format.html { redirect_to @salon, notice: 'Salon was successfully created.' }
-          format.json { render :show, status: :created, location: @salon }
-        else
-          format.html { render :new }
-          format.json { render json: @salon.errors, status: :unprocessable_entity }
-        end
+    @salon = Salon.new(salon_params)
+    respond_to do |format|
+      if @salon.save
+        format.html { redirect_to @salon, notice: 'Salon was successfully created.' }
+        format.json { render :show, status: :created, location: @salon }
+      else
+        format.html { render :new }
+        format.json { render json: @salon.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to(:back)
     end
   end
 
@@ -110,17 +110,13 @@ class SalonsController < ApplicationController
   # DELETE /salons/1
   # DELETE /salons/1.json
   def destroy
-    if current_user.control.to_i == 0
-      @salon.prices.each do |price|
-        price.destroy
-      end
-      @salon.destroy
-      respond_to do |format|
-        format.html { redirect_to salons_url, notice: 'Salon was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else
-      redirect_to(:back)
+    @salon.prices.each do |price|
+      price.destroy
+    end
+    @salon.destroy
+    respond_to do |format|
+      format.html { redirect_to salons_url, notice: 'Salon was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

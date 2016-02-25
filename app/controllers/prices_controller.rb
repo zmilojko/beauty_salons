@@ -1,6 +1,6 @@
 class PricesController < ApplicationController
   before_action :set_price, only: [:show, :edit, :update, :destroy]
-  before_filter :require_permission, only: [:create, :new, :edit, :update, :destroy, :advanced_edit]
+  before_filter :require_permission, only: [:new, :edit, :update, :destroy, :advanced_edit]
 
 
   def require_permission
@@ -10,10 +10,9 @@ class PricesController < ApplicationController
     @salon = Salon.find_by_permalink(params[:id])
     if @salon
       id = @salon.id
-    else
-      if @price
-        id = @price.salon.id
-      end
+    end
+    if @price
+      id = @price.salon.id
     end
     if current_user.control.to_i == id or current_user.control.to_i == 0
       return true
@@ -59,17 +58,21 @@ class PricesController < ApplicationController
   # POST /prices
   # POST /prices.json
   def create
-    @price = Price.new(price_params)
-
-    respond_to do |format|
-      if @price.save
-        update_services(@price)
-        format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully created.'}
-        format.json { render :show, status: :created, location: @price }
-      else
-        format.html { render :back }
-        format.json { render json: @price.errors, status: :unprocessable_entity }
+    if price_params[:salon_id].to_i == current_user.control.to_i or current_user.control.to_i == 0
+      @price = Price.new(price_params)
+      respond_to do |format|
+        if @price.save
+          update_services(@price)
+          format.html { redirect_to :back, notice: '<b>' + @price.service.name + '</b> was successfully created.'}
+          format.json { render :show, status: :created, location: @price }
+        else
+          format.html { render :back }
+          format.json { render json: @price.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = t("no_right_to_do_that")
+      redirect_to root_path
     end
   end
 

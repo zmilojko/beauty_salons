@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def super_admin_permissions
+    if current_user.control.to_i == 0
+      return true
+    else
+      flash[:alert] = t("no_right_to_do_that")
+      redirect_to root_path
+    end
+  end
+
   def after_sign_up_path_for(resource)
      '/' # Or :prefix_to_your_route
    end
