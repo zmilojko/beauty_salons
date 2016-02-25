@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+
 
   root to: 'salons#index'
 
   authenticate :user do
+    get "/user/create_new" => "users#new_custom", as: "new_user"
+    post "/user/create" => "users#create_custom", as: "users"
+    delete "/user/delete/:id" => "users#delete_custom", as: "delete_user"
+
     # protect salon route
     get "/salon/:id/edit/prices" => "prices#advanced_edit", as: "edit_salon_price"
     post "/saloni" => "salons#create"
@@ -28,6 +32,8 @@ Rails.application.routes.draw do
 
     get "/users" => "users#list", as: "list_users"
   end
+
+  devise_for :users
 
   # allow salon routes
   get "/saloni" => "salons#index", as: "salons"

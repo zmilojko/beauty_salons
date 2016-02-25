@@ -10,5 +10,5 @@
           - if user.control.to_i != 0
             = Salon.find(user.control).name
           |
-          
+          = link_to 'Destroy', delete_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }
           %hr

@@ -80,6 +80,8 @@
             .col-md-6.text-right
               - if user_signed_in?
                 - if current_user.control.to_i == 0
+                  = link_to "Dodaj usera", new_user_path
+                  |
                   = link_to 'Svi korisnici', list_users_path
                   |
                 = link_to 'Promena podataka', edit_user_registration_path
