@@ -2,11 +2,11 @@
 %html
   %head
     %title Beautysalons
-    %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css",:rel => "stylesheet", :type => "text/css"}
     %link{:href => "//fonts.googleapis.com/css?family=Poiret+One|Lato:400,300,700,900&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     %script{:src => "//maps.googleapis.com/maps/api/js"}
+    %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css",:rel => "stylesheet", :type => "text/css"}
     %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"}
     = csrf_meta_tags
     - if user_signed_in?
@@ -14,6 +14,9 @@
     - else
       %body
     :javascript
+      $(document).ready(function() {
+         $('.selectpicker').selectpicker();
+      });
       function removeLocation(){
         document.getElementById("removeLocation").innerHTML = '<span class="glyphicon glyphicon-refresh spinning"></span>Brisanje lokacije';
         url = window.location.toString();
