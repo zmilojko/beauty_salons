@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   post 'mailchimpsubscribe/subscribe' => 'mailchimpsubscribe#subscribe'
 
-  root to: 'salons#index'
+  root "pages#show", page: "pocetna"
 
   authenticate :user do
     get "/users" => "users#list", as: "list_users"
@@ -42,5 +42,8 @@ Rails.application.routes.draw do
 
   # allow service routes
   get "/usluga/:id" => "services#show", as: "service"
+
+  # allow pages routes
+  get "/:page" => "pages#show"
 
 end

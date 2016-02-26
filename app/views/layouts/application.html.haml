@@ -162,7 +162,10 @@
                 %a{:id => "removeLocation" , :href => "#", :onclick => "removeLocation()"}
                   %span.glyphicon.glyphicon-map-marker
                   ZABORAVI LOKACIJU
+            %li= link_to "Početna", '/'
+            %li= link_to "O nama", '/o-nama'
             %li= link_to "Saloni", salons_path
+            %li= link_to "Kontakt", '/kontakt'
             - if !user_signed_in?
               %li= link_to "Sign in", new_user_session_path
     .navbar.navbar-purple
@@ -188,24 +191,8 @@
         %aside.col-md-3
           %h3.lead Usluge
           .panel.panel-default.panel-services
-            / <div class="panel-heading">Usluge:</div>
             .panel-body
               = render 'prices/countservices'
-          %h3.lead Login
-          .panel.panel-default.panel-login
-            / <div class="panel-heading">Login</div>
-            .panel-body
-              %form{:role => "form"}
-                .form-group
-                  %label{:for => "email"} Email:
-                  %input#email.form-control{:placeholder => "Enter email", :type => "email"}
-                .form-group
-                  %label{:for => "pwd"} Password:
-                  %input#pwd.form-control{:placeholder => "Enter password", :type => "password"}
-                .checkbox
-                  %label
-                    %input{:type => "checkbox"} Remember me
-                %button.btn.btn-default{:type => "submit"} Submit
     %footer.navbar-inverse
       .container
         .row
