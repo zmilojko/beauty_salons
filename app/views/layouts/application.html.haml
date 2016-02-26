@@ -16,6 +16,52 @@
     :javascript
       $(document).ready(function() {
          $('.selectpicker').selectpicker();
+          $('form#mailchimpsubscribe').bind("ajax:beforeSend", function(evt, xhr, settings){
+            var $divResponse = $('div#response');
+
+            // Update the text of the submit button to let the user know stuff is happening.
+            // But first, store the original text of the submit button, so it can be restored when the request is finished.
+            $divResponse.data( 'origText', $divResponse.text() );
+            $divResponse.text( "Adding Email...." );
+
+          })
+          .bind("ajax:success", function(evt, data, status, xhr){
+            var $form = $(this);
+             var $divResponse = $('div#response');
+
+            // Reset fields and any validation errors, so form can be used again, but leave hidden_field values intact.
+            $form.find('input[type="email"]').val("");
+            $divResponse.html(data.message);
+          })
+          .bind('ajax:complete', function(evt, xhr, status){
+            var $divResponse = $('div#response');
+          })
+          .bind("ajax:error", function(evt, xhr, status, error){
+             var $divResponse = $('div#response'),
+                errors,
+                errorText,
+            errorList;
+
+            try {
+              // Populate errorText with the comment errors
+              errors = $.parseJSON(xhr.responseText);
+            } catch(err) {
+              // If the responseText is not valid JSON (like if a 500 exception was thrown), populate errors with a generic error message.
+              errors = {message: "Please reload the page and try again"};
+            }
+
+            // Build an unordered list from the list of errors
+            errorText = "There were errors with the submission. Please reload the page and try again.";
+            errorList = "<ul>"
+            for ( error in errors ) {
+              errorList += "<li>" + error + ': ' + errors[error] + "</li> ";
+            }
+
+            errorList += "</ul>";
+
+            // Insert error list into form
+            $divResponse.html(errorText);
+          });
       });
       function removeLocation(){
         document.getElementById("removeLocation").innerHTML = '<span class="glyphicon glyphicon-refresh spinning"></span>Brisanje lokacije';
@@ -172,10 +218,10 @@
           .col-md-3
             %h3 Budite u toku!
             %p Registrujte svoju email adresu koristeći kontakt formu, i budite uvek u toku sa najnovijim ponudama!
-            %form{:role => "form"}
-              .form-group
-                %input#email.form-control{:placeholder => "Unesite ovde Vašu email adrese", :type => "email"}
-              %button.btn.btn-default{:type => "submit"} PRIJAVA
+            = form_tag('/mailchimpsubscribe/subscribe', method: "post", id: "mailchimpsubscribe", class: "form-group", remote: "true") do
+              = email_field(:email, :address, {id: "email", class: "form-control", placeholder: "Unesite ovde Vašu email adresu"})
+              = submit_tag("PRIJAVA",:class => 'btn btn-default')
+            .subscribe#response
           .col-md-3
             %h3 Najnoviji saloni
             %ul.latest_salons

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  post 'mailchimpsubscribe/subscribe' => 'mailchimpsubscribe#subscribe'
 
   root to: 'salons#index'
 
