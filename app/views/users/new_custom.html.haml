@@ -13,7 +13,7 @@
             = f.label :control
             %br/
 
-            %select{ :name => "user[control]", :class => "selectpicker" }
+            %select{ :name => "user[control]", :class => "selectpicker",'data-live-search': 'true', 'tabindex': "-99" }
               - Salon.all.each do |s|
                 %option{:value => s.id}= s.name
               %option{:value => '0'}= 'SUPER ADMIN'
