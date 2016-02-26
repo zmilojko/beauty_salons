@@ -4,3 +4,17 @@
 #mailchimpsubscribe input[type="submit"]{
   margin-top: 12px;
 }
+#response.subscribe .alert-success{
+  background-color: #349634;
+  border-color: #349634;
+  color: white;
+}
+#response.subscribe .alert-success strong{
+  font-size: 16px;
+  text-transform: uppercase;
+}
+#response.subscribe .alert-danger{
+  background-color: #a94442;
+  border-color: #a94442;
+  color:white;
+}
